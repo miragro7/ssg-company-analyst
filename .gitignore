@@ -1,0 +1,7 @@
+.env
+report/
+__pycache__/
+*.pyc
+*.pyo
+*_content.json
+.DS_Store

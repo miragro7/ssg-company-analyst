@@ -1,0 +1,4 @@
+pyTelegramBotAPI
+python-docx
+lxml
+python-dotenv
