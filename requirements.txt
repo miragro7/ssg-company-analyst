@@ -2,3 +2,4 @@ pyTelegramBotAPI
 python-docx
 lxml
 python-dotenv
+beautifulsoup4

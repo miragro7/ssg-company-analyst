@@ -1,6 +1,11 @@
 # ssg-company-analyst
 
-AI-powered company analysis skill for Claude Code.
+AI-powered skills for Claude Code — company analysis and Word document formatting.
+
+---
+
+## Skill 1 · 스드스 (Company Analyst)
+
 Type the trigger below in your Telegram chat — Claude automatically
 researches, builds a 14-section report, and delivers HTML + Word files.
 
@@ -140,6 +145,55 @@ Add a concept keyword before the company name for focused analysis:
 | *(default)* | 종합분석 — Comprehensive analysis |
 
 Example: `스드스야 투자판단 삼성전자 분석해줘`
+
+---
+
+---
+
+## Skill 2 · 워드 정리 (Word Organizer)
+
+Send any document to your Telegram bot — Claude converts it into a
+neatly formatted Word file using the sds-word-writer style.
+
+**Trigger**
+> 워드 정리
+
+Then attach a `.docx`, `.html`, or `.txt` file.
+Claude extracts the structure, applies the sds-word-writer style (바탕체 14pt,
+Roman-numeral sections, dash bullets, page numbers), and returns a `.docx` file.
+
+### Supported Input Formats
+
+| Format | How it's parsed |
+|--------|-----------------|
+| `.docx` | Paragraphs + bold headings via python-docx |
+| `.html` / `.htm` | h1–h6 / p / li / td via BeautifulSoup |
+| `.txt` | Line-by-line; auto-detects numbered/symbol headings |
+
+### Add skill instruction to your CLAUDE.md
+
+Copy the contents of `word_skill.md` into your project's `CLAUDE.md`.
+
+---
+
+## File Structure
+
+```
+ssg-company-analyst/
+├── sdeus_pipeline.py        # 스드스: Main pipeline (HTML + Word + Telegram)
+├── sdeus_reporter.py        # 스드스: HTML report generator (14-section)
+├── word_organizer.py        # 워드 정리: File → sds-word-writer style Word
+├── skill.md                 # 스드스 Claude Code skill definition
+├── word_skill.md            # 워드 정리 Claude Code skill definition
+├── 워드 정리.md              # 워드 정리 Korean documentation
+├── .env.example             # Environment variable template
+├── requirements.txt         # Python dependencies
+├── report/                  # Generated reports saved here (gitignored)
+└── skills/
+    └── sds-word-writer/
+        └── scripts/
+            └── generate.py  # Shared Word (.docx) generator
+```
 
 ---
 
