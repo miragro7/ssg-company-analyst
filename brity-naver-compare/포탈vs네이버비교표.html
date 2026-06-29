@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>포탈·결재·일정·할일·연락처·메일·환경설정/보안 비교 · Brity vs Naver</title>
+  <style>
+    :root{--blue:#0b4a8f;--deep:#12345c;--naver:#03c75a;--brity:#1e6cbf;--line:#d8dee8;--soft:#f4f7fb;--text:#172033;--muted:#687386;--green:#157a45;--gray:#6c7480;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#eef2f7;color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;font-size:13px;line-height:1.5;}
+    .page{max-width:1400px;margin:0 auto;padding:28px 20px;}
+    .hero{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 28px 20px;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    .eyebrow{color:var(--blue);font-size:12px;font-weight:700;margin-bottom:6px;}
+    h1{font-size:26px;font-weight:800;color:var(--deep);margin-bottom:6px;}
+    .subtitle{color:var(--muted);font-size:13px;}
+    .score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;}
+    .sc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px 14px;text-align:center;}
+    .sc .lbl{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px;}
+    .sc .val{font-size:22px;font-weight:800;}
+    .sc .val.b{color:var(--brity);}
+    .sc .val.n{color:var(--naver);}
+    .sec-title{font-size:16px;font-weight:800;color:var(--deep);margin:24px 0 10px;padding-left:10px;border-left:4px solid var(--blue);}
+    .domain-bar{font-size:14px;font-weight:800;color:#fff;margin:22px 0 8px;padding:9px 16px;background:var(--blue);border-radius:6px;}
+    .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:10px;font-size:11px;color:var(--muted);align-items:center;}
+    .legend span{display:inline-flex;align-items:center;gap:5px;}
+    .dot{display:inline-block;width:10px;height:10px;border-radius:2px;}
+    .dot.b-win{background:var(--brity);}
+    .dot.n-win{background:var(--naver);}
+    .dot.equal{background:#aabbcc;}
+    .dot.b-only{background:#9b59b6;}
+    .tbl-wrap{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:auto;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    table{width:100%;min-width:900px;border-collapse:separate;border-spacing:0;}
+    thead th{position:sticky;top:0;z-index:2;background:#1a3a6b;color:#fff;font-size:12px;font-weight:700;padding:11px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.15);}
+    thead th:last-child{border-right:none;}
+    tbody td{padding:12px 10px;vertical-align:top;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+    tbody td:last-child{border-right:none;}
+    tbody tr:last-child td{border-bottom:none;}
+    tbody tr:nth-child(even) td{background:#f9fbfd;}
+    .lv2{font-weight:800;font-size:14px;color:var(--deep);white-space:nowrap;}
+    .lv2-sub{font-size:11px;color:var(--muted);font-weight:400;margin-top:3px;}
+    .score-cell{text-align:center;}
+    .moon{width:38px;height:38px;border-radius:50%;border:1.5px solid #8c96a6;background:conic-gradient(#1e3d70 var(--fill),#e8edf3 0);margin:0 auto 6px;}
+    .moon.na{background:repeating-linear-gradient(45deg,#eef2f6 0 4px,#cdd5df 4px 8px);}
+    .score-num{font-size:18px;font-weight:800;display:block;}
+    .score-num.b{color:var(--brity);}
+    .score-num.n{color:var(--naver);}
+    .score-num.na{color:var(--gray);font-size:14px;}
+    .score-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+    .badge{display:inline-flex;align-items:center;justify-content:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap;}
+    .badge.b-win{background:#dbeafe;color:#1e40af;}
+    .badge.n-win{background:#dcfce7;color:#15803d;}
+    .badge.equal{background:#f1f5f9;color:#475569;}
+    .badge.b-only{background:#ede9fe;color:#6d28d9;}
+    .eval{font-size:12px;color:#243044;line-height:1.55;}
+    .eval b{color:var(--deep);}
+    .eval .b-tag{color:var(--brity);font-weight:700;}
+    .eval .n-tag{color:#079248;font-weight:700;}
+    .ux-pair{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+    .ux-item{text-align:center;min-width:60px;}
+    .ux-lbl{font-size:10px;color:var(--muted);margin-bottom:4px;}
+    .ux-val{font-size:15px;font-weight:800;}
+    .ux-val.b{color:var(--brity);}
+    .ux-val.n{color:var(--naver);}
+    .ux-val.na{color:var(--gray);}
+    .no-ux-note{background:#f8f9fb;border:1px dashed var(--line);border-radius:8px;padding:10px 14px;color:var(--muted);font-size:12px;margin-bottom:20px;}
+    .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:8px;padding-bottom:20px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="eyebrow">삼성SDS 브리티웍스 기능 진단 · KPMG 삼정회계법인 · Level 2 집계</div>
+    <h1>🏢 포탈·결재·일정·할일·연락처·메일·환경설정/보안 — Brity Works vs Naver Works</h1>
+    <p class="subtitle">기능성 진단(기능 보유 수준) + 사용성 진단(직관성·간결성)을 Level 2 기준으로 집계한 비교표입니다. 결재·환경설정/보안은 KPMG 사용성 진단 대상에서 제외되어 기능성 진단만 표시합니다.</p>
+    <div class="score-row">
+      <div class="sc"><div class="lbl">포탈 기능성 · Brity / Naver</div><div class="val b">3.28 <span style="color:var(--naver)">/ 3.88</span></div></div>
+      <div class="sc"><div class="lbl">일정 기능성 · Brity / Naver</div><div class="val b">4.27 <span style="color:var(--naver)">/ 3.50</span></div></div>
+      <div class="sc"><div class="lbl">메일 기능성 · Brity / Naver</div><div class="val b">3.79 <span style="color:var(--naver)">/ 3.74</span></div></div>
+      <div class="sc"><div class="lbl">환경설정/보안 · Brity / Naver</div><div class="val b">4.25 <span style="color:var(--naver)">/ 3.00</span></div></div>
+    </div>
+  </div>
+
+  
+  <div class="domain-bar">🌐 포탈</div>
+  <div class="sec-title" style="margin-top:12px">▌ 기능성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">Home/메인 화면 관리<div class="lv2-sub">통합검색 · 메인화면 Customizing · 개인정보설정 · 포탈위젯설정 · 사이드메뉴설정</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:76%"></div>
+            <span class="score-num b">3.8</span>
+            <div class="score-sub">통합검색 4.5 / 메인화면 4.0 / 개인정보 4.0 / 위젯설정 2.5 / 사이드메뉴 4.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:75%"></div>
+            <span class="score-num n">3.76</span>
+            <div class="score-sub">통합검색 4.5 / 메인화면 4.0 / 개인정보 4.0 / 위젯설정(하) / 사이드메뉴(하)</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>통합 검색 및 지원:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span> 동등 기능 수준. 프로필 카드 통한 타 서비스 연계 등 제공<br><br><b>메인 화면 Customizing:</b> 양사 동등 기능 수준. <span class="b-tag">Brity Works</span>는 레이아웃 설정 및 다크/라이트 모드 설정 기능 제공<br><br><b>포탈 위젯 설정:</b> Dooray 대비 <span class="b-tag">Brity Works</span> 열위. Dooray는 배너 생성/관리, 커스텀 위젯(미니 위젯 등) 기능 제공<br><br><b>사이드 메뉴 설정:</b> MS Teams 대비 <span class="b-tag">Brity Works</span> 열위. MS Teams는 Drag&Drop을 통한 사이드 메뉴 위치 조정 기능 제공</td>
+        </tr>
+        <tr>
+          <td class="lv2">메모 관리<div class="lv2-sub">메모 작성/저장 · 메모 수정/삭제 · 메모 공유/조회</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:41%"></div>
+            <span class="score-num b">2.07</span>
+            <div class="score-sub">메모작성 2.0 / 수정삭제 2.0 / 공유조회 2.2</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:81%"></div>
+            <span class="score-num n">4.07</span>
+            <div class="score-sub">메모작성(상) / 수정삭제(상) / 공유조회 5.0</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>메모 작성/저장·수정/삭제:</b> M365·Google Workspace 대비 <span class="b-tag">Brity Works</span> 열위. <span class="n-tag">Naver Works</span>는 메일 에디터를 메모에 그대로 적용하여 메일과 동등 수준의 기능 제공(메일 AI 기능 등)<br><br><b>메모 공유/조회:</b> <span class="n-tag">Naver Works</span>는 메모 리마인더, 메모에 그대로 적용하여 메일과 동등 수준의 기능 제공 및 메모와 메일·일정·할 일 연계 검색 필터 옵션 세분화로 <span class="b-tag">Brity Works</span> 대비 우위</td>
+        </tr>
+        <tr>
+          <td class="lv2">게시물 관리<div class="lv2-sub">게시 등록/수정/삭제 · 게시 조회/설정</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:65%"></div>
+            <span class="score-num b">3.25</span>
+            <div class="score-sub">게시등록 2.0 / 게시조회 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:91%"></div>
+            <span class="score-num n">4.55</span>
+            <div class="score-sub">게시등록 5.0 / 게시조회 4.1</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>게시 등록/수정/삭제:</b> <span class="n-tag">Naver Works</span> 대비 <span class="b-tag">Brity Works</span> 열위. Naver Works는 게시글 제목 추천, 게시글 초안 작성, 댓글 번역 등 게시물 작성 시 AI 지원 기능 제공<br><br><b>게시 조회/설정:</b> 타사 솔루션 4개 대비 <span class="b-tag">Brity Works</span> 우위. 국내 솔루션 간 기능 수준은 유사하나 Brity Works는 솔루션 내 서비스 간 Seamless 연계성에서 우수(메일·결재·일정·할 일·커뮤니티 등으로 게시물 보내기 가능)</td>
+        </tr>
+        <tr>
+          <td class="lv2">커뮤니티 관리<div class="lv2-sub">커뮤니티글 등록/수정/삭제 · 커뮤니티 조회/설정</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:80%"></div>
+            <span class="score-num b">4.0</span>
+            <div class="score-sub">커뮤니티등록 4.0 / 커뮤니티조회 4.0</div></td>
+          <td class="score-cell"><div class="moon na"></div>
+            <span class="score-num na">미보유</span>
+            <div class="score-sub">해당 기능 없음</div></td>
+          <td style="text-align:center"><span class="badge b-only">Brity 단독</span></td>
+          <td class="eval"><span class="b-tag">Brity Works</span> <b>단독 보유 기능</b>. <span class="n-tag">Naver Works</span>는 커뮤니티 관리 기능 미보유.<br><br>사내 동호회 등 특정 인원의 소통을 목적으로 게시물을 작성/관리하는 기능(타 사의 경우 목적별 구분 없이 게시판 기능을 통해 제공)</td>
+        </tr></tbody></table></div>
+  <div class="sec-title">▌ 사용성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">게시물 관리<div class="lv2-sub">게시 등록/수정/삭제</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">3.6</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">3.8</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">게시등록 3.60 / 3.80</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.6</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">5.0</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">게시등록 4.60 / 5.00</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>게시 등록/수정/삭제:</b> <span class="n-tag">Naver Works</span> 직관성·간결성 1위. Naver Works의 왼쪽 위 "글쓰기" 버튼 크기/색상을 포함한 관련 게시글 설정 모두 직관적인 식별 가능. <span class="b-tag">Brity Works</span>의 게시글 작성이 게시판 선택하기 전까지 노출이 안되어 직관적이지 않음. 간결성도 Naver Works 1위</td>
+        </tr></tbody></table></div>
+
+  
+  <div class="domain-bar">✅ 결재</div>
+  <div class="sec-title" style="margin-top:12px">▌ 기능성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">기안 관리<div class="lv2-sub">결재 작성 · 결재선 지정</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:83%"></div>
+            <span class="score-num b">4.15</span>
+            <div class="score-sub">결재작성 4.0 / 결재선지정 4.3</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:85%"></div>
+            <span class="score-num n">4.25</span>
+            <div class="score-sub">결재작성 4.0 / 결재선지정 4.5</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>결재 작성:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span>·Dooray 3사 동위. Brity Works는 예약 상신 기능 보유. Naver Works는 기안 작성 시 OCR(AI) 기능 보유(비용 청구 시 영수증 읽기 등)<br><br><b>결재선 지정:</b> <span class="n-tag">Naver Works</span> 수신 그룹 세분화 기능 보유. <span class="b-tag">Brity Works</span>·Dooray는 결재선/결재 유형 설정 세분화</td>
+        </tr>
+        <tr>
+          <td class="lv2">결재 상태 관리<div class="lv2-sub">결재 상태 조회</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:100%"></div>
+            <span class="score-num b">5.0</span>
+            <div class="score-sub">결재상태조회 5.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:80%"></div>
+            <span class="score-num n">4.0</span>
+            <div class="score-sub">결재상태조회 4.0</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>결재 상태 조회:</b> 국내 솔루션 2개 대비 <span class="b-tag">Brity Works</span> 우위. <span class="b-tag">Brity Works</span>는 결재편집(경로/본문/의견/설정 수정 등)·연계 기능 세분화. <span class="n-tag">Naver Works</span>는 필터/검색 기능 세분화</td>
+        </tr>
+        <tr>
+          <td class="lv2">결재 양식 관리<div class="lv2-sub">결재 양식 작성/수정/조회</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:42%"></div>
+            <span class="score-num b">2.1</span>
+            <div class="score-sub">결재양식 2.1</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:88%"></div>
+            <span class="score-num n">4.4</span>
+            <div class="score-sub">결재양식 4.4</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>결재 양식 작성/수정/조회:</b> 국내 솔루션 2개 대비 <span class="b-tag">Brity Works</span> 열위. <span class="n-tag">Naver Works</span>·Dooray는 결재 양식 편집 기능 부분에서 Brity Works 대비 우위</td>
+        </tr></tbody></table></div>
+  <div class="sec-title">▌ 사용성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="no-ux-note">ℹ 해당 영역은 KPMG 사용성 진단 평가 대상에서 제외되었습니다.</div>
+
+  
+  <div class="domain-bar">📅 일정</div>
+  <div class="sec-title" style="margin-top:12px">▌ 기능성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">일정 관리<div class="lv2-sub">일정 작성/수정 · 일정 조회 · 일정 공유관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:81%"></div>
+            <span class="score-num b">4.03</span>
+            <div class="score-sub">작성수정 4.1 / 조회 3.5 / 공유관리 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:52%"></div>
+            <span class="score-num n">2.6</span>
+            <div class="score-sub">작성수정 2.6 / 조회 3.1 / 공유관리 2.1</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>일정 작성/수정:</b> MS Teams 대비 <span class="b-tag">Brity Works</span> 열위. Brity Works는 세부 기능은 솔루션 중 가장 많으나 타 서비스 연계성에서 Teams·Google 대비 낮은 점수 보임(메신저·연락처·미팅 등)<br><br><b>일정 조회:</b> MS Teams 대비 <span class="b-tag">Brity Works</span> 열위. MS Teams는 일정 조회 시 상세조회 기능을 통해 회신여부 추적·일정 시간 변경 등 세부 옵션 조회. <span class="b-tag">Brity Works</span>는 일정 조회 후 메일·결재·할 일·게시·메신저 등으로 연계 가능<br><br><b>일정 공유관리:</b> <span class="b-tag">Brity Works</span>·MS Teams 동위. Brity Works는 관심/구독 캘린더 설정 등 일정 공유 기능 세분화, 타 서비스로 일정 공유 기능 우수</td>
+        </tr>
+        <tr>
+          <td class="lv2">캘린더 관리<div class="lv2-sub">캘린더 조회</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:90%"></div>
+            <span class="score-num b">4.5</span>
+            <div class="score-sub">캘린더조회 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:88%"></div>
+            <span class="score-num n">4.4</span>
+            <div class="score-sub">캘린더조회 4.4</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>캘린더 조회:</b> 타사 솔루션 4개 대비 <span class="b-tag">Brity Works</span> 우위. <span class="b-tag">Brity Works</span>는 다양한 형태의 조회 옵션 제공·메일을 통한 공유대상·부서 추가 가능. <span class="n-tag">Naver Works</span>는 기간별 조회 및 일정 조회 옵션 세분화(제목·등록/참석자·본문·파일 이름 기준 검색 가능)</td>
+        </tr></tbody></table></div>
+  <div class="sec-title">▌ 사용성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">일정 관리<div class="lv2-sub">일정 작성/수정 · 일정 조회</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.71</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.83</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">작성수정 4.43/4.66 · 조회 5.00/5.00</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.39</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">4.59</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">작성수정 4.17/4.37 · 조회 4.60/4.80</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>일정 작성/수정:</b> M365 1위, <span class="b-tag">Brity Works</span> 3위. M365의 화상회의 개설 버튼의 크기/색상/위치 관점 직관성이 높음. 일부 Brity Works의 일정 등록 시 화상회의 개설 버튼이 상세 설정으로 진입하는 절차 발생<br><br><b>일정 조회:</b> <span class="b-tag">Brity Works</span>·Dooray·Google Workspace 공동 1위. Day/Week/Month/Year/Agenda 등 유사 일정 뷰 타입 보유. 간결성도 공동 1위</td>
+        </tr></tbody></table></div>
+
+  
+  <div class="domain-bar">☑️ 할 일</div>
+  <div class="sec-title" style="margin-top:12px">▌ 기능성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">할일 관리<div class="lv2-sub">할일 작성 · 할일 수정/삭제 · 할일 조회/공유</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:83%"></div>
+            <span class="score-num b">4.13</span>
+            <div class="score-sub">작성 4.5 / 수정삭제 3.4 / 조회공유 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:60%"></div>
+            <span class="score-num n">3.0</span>
+            <div class="score-sub">작성 2.4 / 수정삭제 3.5 / 조회공유 3.1</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>할일 작성:</b> 타사 솔루션 4개 대비 <span class="b-tag">Brity Works</span> 우위. Brity Works는 할 일 등록 시 현재 단계·완료율·우선 순위 등 Task에 대한 상세 설정 및 Task에 대한 미리 알림 기능 수준 우위<br><br><b>할일 수정/삭제:</b> Dooray 대비 <span class="b-tag">Brity Works</span> 열위. Dooray는 등록된 할 일 히스토리 관리(할 일에 대한 피드백·세부의견 작성·댓글 URL 복사 등) 우위<br><br><b>할일 조회/공유:</b> 타사 솔루션 4개 대비 <span class="b-tag">Brity Works</span> 우위. Brity Works는 할 일을 솔루션 내 서비스 간 Seamless한 연계 가능(결재·일정·게시·메일 등)</td>
+        </tr></tbody></table></div>
+  <div class="sec-title">▌ 사용성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">할일 관리<div class="lv2-sub">할일 작성 · 할일 수정/삭제 · 할일 조회</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.6</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.57</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">작성 4.80/4.50 · 수정삭제 4.40/4.40 · 조회 4.60/4.80</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.4</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">4.33</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">작성 4.60/4.40 · 수정삭제 5.00/5.00 · 조회 3.60/3.60</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>할일 작성:</b> <span class="b-tag">Brity Works</span> 직관성 1위. 담당자 지정 기능의 필드 노출이 최상위 depth에 있어 타사 대비 직관적임. 간결성은 Dooray 1위, Brity Works 2위<br><br><b>할일 수정/삭제:</b> <span class="n-tag">Naver Works</span> 직관성·간결성 공동 1위. 타사 대비 할 일 수정이 배너에 있어 직관적이며 페이지 이동이나 별도 팝업 없이 수정 기능이 간결함<br><br><b>할일 조회:</b> <span class="b-tag">Brity Works</span>·Dooray 직관성 공동 2위. 캘린더 화면을 통해 전체 일정을 직관적으로 확인 가능. 간결성 Brity Works·Dooray 공동 1위</td>
+        </tr></tbody></table></div>
+
+  
+  <div class="domain-bar">👤 연락처</div>
+  <div class="sec-title" style="margin-top:12px">▌ 기능성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">연락처 관리<div class="lv2-sub">연락처 생성/수정/삭제 · 연락처 검색/조회</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:70%"></div>
+            <span class="score-num b">3.5</span>
+            <div class="score-sub">생성수정삭제 3.0 / 검색조회 4.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:83%"></div>
+            <span class="score-num n">4.15</span>
+            <div class="score-sub">생성수정삭제 4.0 / 검색조회 4.3</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>연락처 생성/수정/삭제:</b> <span class="n-tag">Naver Works</span> 대비 <span class="b-tag">Brity Works</span> 열위. Naver Works는 연락처 직접 등록, Line 및 타 Naver Works 사용자 등록, QR 통한 구성원 초대 등 자사 솔루션의 연락처 등록 채널 확장성 보유<br><br><b>연락처 검색/조회:</b> Google Workspace 대비 <span class="b-tag">Brity Works</span> 열위. Google Workspace는 내 계정과 상대방 간 최근 interaction 및 공유 파일 정보 조회, 타 서비스 연계 기능 우수</td>
+        </tr>
+        <tr>
+          <td class="lv2">조직도 관리<div class="lv2-sub">조직도 관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:80%"></div>
+            <span class="score-num b">4.0</span>
+            <div class="score-sub">조직도관리 4.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:80%"></div>
+            <span class="score-num n">4.0</span>
+            <div class="score-sub">조직도관리 4.0</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>조직도 관리:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span> 동위. 조직도 관리 기능은 국내 솔루션 3사만 보유하고 있으며, 세부 옵션에 차이가 있으나 유의미한 수준은 아님</td>
+        </tr></tbody></table></div>
+  <div class="sec-title">▌ 사용성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">연락처 관리<div class="lv2-sub">연락처 생성/수정/삭제 · 연락처 검색 조회</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.7</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.8</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">생성수정삭제 4.80/4.80 · 검색조회 4.60/4.80</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">3.9</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">4.1</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">생성수정삭제 3.40/3.20 · 검색조회 4.40/5.00</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>연락처 생성/수정/삭제:</b> <span class="b-tag">Brity Works</span> 직관성·간결성 1위. 사용자 프로필 중심에 연락처 관리 기능을 연결함으로써 높은 직관성 제공. 프로필 조회부터 연락처 추가까지 불필요한 클릭 없이 간결한 연락처 관리 사용자 경험 구현<br><br><b>연락처 검색 조회:</b> <span class="b-tag">Brity Works</span> 직관성 1위. Brity Works는 포털 상단에 상시 노출된 검색바를 통해 임직원의 담당 업무를 포함한 주요 정보를 직관적으로 검색/조회 가능. 간결성은 <span class="n-tag">Naver Works</span> 1위, Brity Works 2위</td>
+        </tr></tbody></table></div>
+
+  
+  <div class="domain-bar">✉️ 메일</div>
+  <div class="sec-title" style="margin-top:12px">▌ 기능성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">송수신<div class="lv2-sub">메일 작성/발송 · 메일 수신/열람</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:89%"></div>
+            <span class="score-num b">4.45</span>
+            <div class="score-sub">작성발송 3.9 / 수신열람 5.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:78%"></div>
+            <span class="score-num n">3.9</span>
+            <div class="score-sub">작성발송 4.0 / 수신열람 3.8</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>메일 작성/발송:</b> M365(Outlook) 대비 <span class="b-tag">Brity Works</span> 열위. M365(Outlook)는 루프 삽입, 메일 템플릿(서식 설정), 파일첨부 옵션(OneDrive 연계) 기능 우위<br><br><b>메일 수신/열람:</b> 타사 4개 대비 <span class="b-tag">Brity Works</span> 우위. Brity Works의 AI 기능은 M365와 동일 수준이며, VIP 지정 / 솔루션 내 서비스 간 Seamless한 사용성 우위</td>
+        </tr>
+        <tr>
+          <td class="lv2">보관함 분류<div class="lv2-sub">메일함 관리 · 자동 분류 · 메일 목록 관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:77%"></div>
+            <span class="score-num b">3.83</span>
+            <div class="score-sub">메일함관리 3.0 / 자동분류 4.0 / 목록관리 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:70%"></div>
+            <span class="score-num n">3.5</span>
+            <div class="score-sub">메일함관리 3.0 / 자동분류 3.0 / 목록관리 4.5</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>메일함 관리:</b> M365(Outlook) 대비 <span class="b-tag">Brity Works</span> 열위. M365(Outlook)의 대부분의 기능 수준은 유사하나 메일함 순서 이동 기능 보유<br><br><b>자동 분류:</b> <span class="b-tag">Brity Works</span>·M365(Outlook) 동위. 타 사 솔루션 대비 M365(Outlook)·Brity Works는 자동 분류 규칙 설정 기능 보유<br><br><b>메일 목록 관리:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span> 동위. Naver Works는 특정인이 보낸 메일을 선택하여 해당 인원과 이전 메일 송수신 이력 확인 및 메일 정리 가능</td>
+        </tr>
+        <tr>
+          <td class="lv2">사용자 설정<div class="lv2-sub">스팸 차단 관리 · 서명 관리 · 부재중 응답 및 메일 공유 관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:62%"></div>
+            <span class="score-num b">3.1</span>
+            <div class="score-sub">스팸차단 3.0 / 서명관리 2.0 / 부재중 4.3</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:77%"></div>
+            <span class="score-num n">3.83</span>
+            <div class="score-sub">스팸차단 4.0 / 서명관리 3.0 / 부재중 4.5</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>스팸 차단 관리:</b> <span class="n-tag">Naver Works</span>·Dooray 대비 <span class="b-tag">Brity Works</span> 열위. Naver Works는 스팸 메일 보관기간 설정·스팸 처리방식 설정·메일함 숨기기 등 스팸 메일 관리 기능 세분화<br><br><b>서명 관리:</b> M365(Outlook)·Dooray 대비 <span class="b-tag">Brity Works</span> 열위. M365(Outlook)·Dooray는 메일 서명 관련 사용여부 설정/이미지 포함 기능/다건 서명 설정 기능 보유<br><br><b>부재중 응답 및 메일 공유 관리:</b> <span class="n-tag">Naver Works</span>·Google Workspace 대비 <span class="b-tag">Brity Works</span> 열위. Naver Works·Google Workspace는 외부 메일/3rd Party 연동 설정 범위에서 우위</td>
+        </tr></tbody></table></div>
+  <div class="sec-title">▌ 사용성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">송수신<div class="lv2-sub">메일 작성/발송 · 메일 수신/열람</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.53</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.7</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">작성발송 4.07/4.40 · 수신열람 5.00/5.00</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.73</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">4.93</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">작성발송 4.47/4.87 · 수신열람 5.00/5.00</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>메일 작성/발송:</b> Google Workspace 직관성 1위, <span class="b-tag">Brity Works</span> 3위. Gmail은 글쓰기 도우미가 본문에 커서 올릴 시 본문내 안내문으로 노출되어 직관성 높음. <span class="n-tag">Naver Works</span>는 본문 바로 위 버튼 클릭으로 간편한 사용 가능. 간결성은 Naver Works 1위<br><br><b>메일 수신/열람:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span>·Dooray 공동 1위. 직관성 및 간결성 모두 각사 대동소이한 메일 수신/열람 뷰 보유</td>
+        </tr>
+        <tr>
+          <td class="lv2">사용자 설정<div class="lv2-sub">부재중 응답 및 메일 공유 관리</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">3.6</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.8</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">부재중 3.60 / 4.80</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">3.4</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">3.8</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">부재중 3.40 / 3.80</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>부재중 응답 및 메일 공유 관리:</b> <span class="b-tag">Brity Works</span> 직관성·간결성 모두 1위. Brity Works의 환경설정에서 부재중 응답 버튼이 최상위에 노출되어 상대적으로 직관성과 간결성 모두 높음</td>
+        </tr></tbody></table></div>
+
+  
+  <div class="domain-bar">🔒 환경설정/보안</div>
+  <div class="sec-title" style="margin-top:12px">▌ 기능성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">환경설정<div class="lv2-sub">공통 환경설정</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:90%"></div>
+            <span class="score-num b">4.5</span>
+            <div class="score-sub">공통환경설정 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:60%"></div>
+            <span class="score-num n">3.0</span>
+            <div class="score-sub">공통환경설정 3.0</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>공통 환경설정:</b> <span class="b-tag">Brity Works</span>·Google Workspace 동위. <span class="b-tag">Brity Works</span>는 보기설정, 작성 창 크기/폰트 기능 상세 설정 기능 제공. Google Workspace는 모바일 기기/외부 디렉토리(Azure Active Director 등) 동기화 설정 기능 제공</td>
+        </tr>
+        <tr>
+          <td class="lv2">보안 기능<div class="lv2-sub">정책/권한 관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:80%"></div>
+            <span class="score-num b">4.0</span>
+            <div class="score-sub">정책권한관리 4.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:60%"></div>
+            <span class="score-num n">3.0</span>
+            <div class="score-sub">정책권한관리 3.0</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>정책/권한 관리:</b> <span class="b-tag">Brity Works</span>·MS Teams 동위. <span class="b-tag">Brity Works</span>는 미팅에서 보안관리 대상자 참석 회의에서 AI 기능(자막/번역/통역/Copilot) 사용 제어 제공. iOS 캡쳐 활용 이력, 로그 조회, 암호화, 특정 참석자 포함 시 이력 삭제, 접속 가능 IP 주소 관리 기능, 드라이브 PC통제·파일 보존기한/금칙어(FLCM)관리 기능 제공. 메신저에서 비밀대화·안심대화·주말/야간/해외 메시지 Alert 문구 기능 제공</td>
+        </tr></tbody></table></div>
+  <div class="sec-title">▌ 사용성 진단</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="no-ux-note">ℹ 해당 영역은 KPMG 사용성 진단 평가 대상에서 제외되었습니다.</div>
+
+  <div class="footer">출처: 삼성SDS 브리티웍스 기능 진단 및 고도화 전략 수립 — 솔루션 기능비교 결과서 (KPMG 삼정회계법인)<br>* 기능성 평가: 5개 솔루션 공통 보유 기능 기준 상대 평가 / 사용성 평가: 공공부문 업무 시나리오 기반 5점 척도 / 동등 수준 판단 기준: 점수 격차 0.1점 이내</div>
+</div>
+</body>
+</html>

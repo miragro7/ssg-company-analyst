@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AI 기능 비교 · Brity Works vs Naver Works</title>
+  <style>
+    :root{--blue:#0b4a8f;--deep:#12345c;--naver:#03c75a;--brity:#1e6cbf;--line:#d8dee8;--soft:#f4f7fb;--text:#172033;--muted:#687386;--green:#157a45;--gray:#6c7480;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#eef2f7;color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;font-size:13px;line-height:1.5;}
+    .page{max-width:1400px;margin:0 auto;padding:28px 20px;}
+    .hero{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 28px 20px;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    .eyebrow{color:var(--blue);font-size:12px;font-weight:700;margin-bottom:6px;}
+    h1{font-size:26px;font-weight:800;color:var(--deep);margin-bottom:6px;}
+    .subtitle{color:var(--muted);font-size:13px;}
+    .score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;}
+    .sc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px 14px;text-align:center;}
+    .sc .lbl{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px;}
+    .sc .val{font-size:22px;font-weight:800;}
+    .sc .val.b{color:var(--brity);}
+    .sc .val.n{color:var(--naver);}
+    .sec-title{font-size:16px;font-weight:800;color:var(--deep);margin:24px 0 10px;padding-left:10px;border-left:4px solid var(--blue);}
+    .domain-bar{font-size:14px;font-weight:800;color:#fff;margin:22px 0 8px;padding:9px 16px;background:var(--blue);border-radius:6px;}
+    .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:10px;font-size:11px;color:var(--muted);align-items:center;}
+    .legend span{display:inline-flex;align-items:center;gap:5px;}
+    .dot{display:inline-block;width:10px;height:10px;border-radius:2px;}
+    .dot.b-win{background:var(--brity);}
+    .dot.n-win{background:var(--naver);}
+    .dot.equal{background:#aabbcc;}
+    .dot.b-only{background:#9b59b6;}
+    .tbl-wrap{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:auto;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    table{width:100%;min-width:900px;border-collapse:separate;border-spacing:0;}
+    thead th{position:sticky;top:0;z-index:2;background:#1a3a6b;color:#fff;font-size:12px;font-weight:700;padding:11px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.15);}
+    thead th:last-child{border-right:none;}
+    tbody td{padding:12px 10px;vertical-align:top;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+    tbody td:last-child{border-right:none;}
+    tbody tr:last-child td{border-bottom:none;}
+    tbody tr:nth-child(even) td{background:#f9fbfd;}
+    .lv2{font-weight:800;font-size:14px;color:var(--deep);white-space:nowrap;}
+    .lv2-sub{font-size:11px;color:var(--muted);font-weight:400;margin-top:3px;}
+    .score-cell{text-align:center;}
+    .moon{width:38px;height:38px;border-radius:50%;border:1.5px solid #8c96a6;background:conic-gradient(#1e3d70 var(--fill),#e8edf3 0);margin:0 auto 6px;}
+    .moon.na{background:repeating-linear-gradient(45deg,#eef2f6 0 4px,#cdd5df 4px 8px);}
+    .score-num{font-size:18px;font-weight:800;display:block;}
+    .score-num.b{color:var(--brity);}
+    .score-num.n{color:var(--naver);}
+    .score-num.na{color:var(--gray);font-size:14px;}
+    .score-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+    .badge{display:inline-flex;align-items:center;justify-content:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap;}
+    .badge.b-win{background:#dbeafe;color:#1e40af;}
+    .badge.n-win{background:#dcfce7;color:#15803d;}
+    .badge.equal{background:#f1f5f9;color:#475569;}
+    .badge.b-only{background:#ede9fe;color:#6d28d9;}
+    .eval{font-size:12px;color:#243044;line-height:1.55;}
+    .eval b{color:var(--deep);}
+    .eval .b-tag{color:var(--brity);font-weight:700;}
+    .eval .n-tag{color:#079248;font-weight:700;}
+    .ux-pair{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+    .ux-item{text-align:center;min-width:60px;}
+    .ux-lbl{font-size:10px;color:var(--muted);margin-bottom:4px;}
+    .ux-val{font-size:15px;font-weight:800;}
+    .ux-val.b{color:var(--brity);}
+    .ux-val.n{color:var(--naver);}
+    .ux-val.na{color:var(--gray);}
+    .no-ux-note{background:#f8f9fb;border:1px dashed var(--line);border-radius:8px;padding:10px 14px;color:var(--muted);font-size:12px;margin-bottom:20px;}
+    .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:8px;padding-bottom:20px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="eyebrow">삼성SDS 브리티웍스 기능 진단 · KPMG 삼정회계법인 · Level 2 집계</div>
+    <h1>🤖 AI 기능 비교 — Brity Works vs Naver Works</h1>
+    <p class="subtitle">기능성 진단(기능 보유 수준) + 사용성 진단(직관성·간결성)을 Level 2 기준으로 집계한 비교표입니다.</p>
+    <div class="score-row">
+      <div class="sc"><div class="lbl">기능성 종합 · Brity</div><div class="val b">3.89</div></div>
+      <div class="sc"><div class="lbl">기능성 종합 · Naver</div><div class="val n">2.68</div></div>
+      <div class="sc"><div class="lbl">사용성(직/간) · Brity</div><div class="val b">4.10 / 4.53</div></div>
+      <div class="sc"><div class="lbl">사용성(직/간) · Naver</div><div class="val n">4.40 / 4.45</div></div>
+    </div>
+  </div>
+
+  <div class="sec-title">▌ 기능성 진단 평가 (5점 척도)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">서비스 내 적용 AI 수준<div class="lv2-sub">포탈·결재·메일·메신저·화상회의·드라이브</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:78%"></div>
+            <span class="score-num b">3.88</span>
+            <div class="score-sub">포탈 1.1 / 결재 4.5 / 메일 3.7 / 메신저 4.5 / 화상회의 5.0 / 드라이브 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:64%"></div>
+            <span class="score-num n">3.18</span>
+            <div class="score-sub">포탈 5.0 / 결재 4.5 / 메일 3.9 / 메신저 1.2 / 화상회의 3.3 / 드라이브 1.2</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>포탈 AI:</b> <span class="n-tag">Naver Works</span> 대비 <span class="b-tag">Brity Works</span> 열위. Naver Works는 포탈 세부 서비스인 메모·게시에 AI 기능 제공<br><br><b>결재 AI:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span> 동등 수준<br><br><b>메신저 AI:</b> <span class="b-tag">Brity Works</span>·MS Teams 동위. Naver Works·Google 대비 열위<br><br><b>화상회의 AI:</b> 타사 4개 대비 <span class="b-tag">Brity Works</span> 우위. 자막·번역·통역·Copilot 등 다양한 AI 기능 제공<br><br><b>드라이브 AI:</b> 타사 4개 대비 <span class="b-tag">Brity Works</span> 우위. M365는 단일 파일 대상 FAQ 생성·다건 파일 비교 기능 제공</td>
+        </tr>
+        <tr>
+          <td class="lv2">Open Chat 기반 AI 기능<div class="lv2-sub">Open Chat 기반 AI 기능</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:78%"></div>
+            <span class="score-num b">3.9</span>
+            <div class="score-sub">Open Chat 기반 AI 3.9</div></td>
+          <td class="score-cell"><div class="moon na"></div>
+            <span class="score-num na">미보유</span>
+            <div class="score-sub">해당 기능 없음</div></td>
+          <td style="text-align:center"><span class="badge b-only">Brity 단독</span></td>
+          <td class="eval"><span class="b-tag">Brity Works</span> <b>단독 보유 기능</b>. <span class="n-tag">Naver Works</span>는 Open Chat 기반 AI 기능 미보유.<br><br>각 솔루션 내 Open Chat 기반 AI 채널에서 AI 기능을 제공. Brity Works는 채팅 형식의 AI 질의응답·외부 정보 검색·문서 요약 기능 등 보유</td>
+        </tr></tbody></table></div>
+
+  <div class="sec-title">▌ 사용성 진단 평가 (5점 척도 · 직관성 / 간결성)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">서비스 내 AI 적용 수준<div class="lv2-sub">메일 · 화상회의</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.0</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.45</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">메일 3.40/4.00 · 화상회의 4.60/4.90</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.4</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">4.45</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">메일 4.60/5.00 · 화상회의 4.20/3.90</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>메일 AI:</b> M365 직관성 1위. <span class="n-tag">Naver Works</span>는 메일 본문 입력창에 "Copilot을 사용하여 초안 작성" 가이드를 보여줘 직관적·간결함. <span class="b-tag">Brity Works</span>는 파란색 "메일 쓰기" 버튼이 있으나 AI 초안 작성인지 확인하기 어렵고 탐색 시간 발생<br><br><b>화상회의 AI:</b> M365 1위, <span class="b-tag">Brity Works</span> 2위. Brity Works는 색상으로 표기하였으나 문구 표시가 되어 있지 않아 직관성 개선 필요. 간결성은 0.1점 차이로 두 솔루션 대동소이</td>
+        </tr>
+        <tr>
+          <td class="lv2">Open Chat 기반 AI 기능<div class="lv2-sub">Open Chat 기반 AI 기능</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.2</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.6</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">Open Chat AI 4.20 / 4.60</div></td>
+          <td class="score-cell"><div class="moon na" style="width:38px;height:38px;margin:0 auto 6px"></div>
+            <span class="score-num na">미보유</span></td>
+          <td style="text-align:center"><span class="badge b-only">Brity 단독</span></td>
+          <td class="eval"><span class="b-tag">Brity Works</span> <b>단독 보유 기능</b>. <span class="n-tag">Naver Works</span>는 Open Chat 기반 AI 기능 미보유로 평가 미해당.<br><br><span class="b-tag">Brity Works</span>는 외부 검색을 위한 별도 상대적으로 간결성 측면에서 일부 고도화 여지 있음. M365(Teams) 1위, Brity Works 3위</td>
+        </tr></tbody></table></div>
+
+  <div class="footer">출처: 삼성SDS 브리티웍스 기능 진단 및 고도화 전략 수립 — 솔루션 기능비교 결과서 (KPMG 삼정회계법인)<br>* 기능성 평가: 5개 솔루션 공통 보유 기능 기준 상대 평가 / 사용성 평가: 공공부문 업무 시나리오 기반 5점 척도 / 동등 수준 판단 기준: 점수 격차 0.1점 이내</div>
+</div>
+</body>
+</html>

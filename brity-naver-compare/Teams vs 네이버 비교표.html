@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>메신저 기능 비교 · Brity Works vs Naver Works</title>
+  <style>
+    :root {
+      --blue:  #0b4a8f;
+      --deep:  #12345c;
+      --naver: #03c75a;
+      --brity: #1e6cbf;
+      --line:  #d8dee8;
+      --soft:  #f4f7fb;
+      --text:  #172033;
+      --muted: #687386;
+      --green: #157a45;
+      --amber: #d97706;
+      --gray:  #6c7480;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #eef2f7;
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .page { max-width: 1400px; margin: 0 auto; padding: 28px 20px; }
+
+    /* ── 헤더 ── */
+    .hero {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 24px 28px 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+      margin-bottom: 20px;
+    }
+    .eyebrow { color: var(--blue); font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+    h1 { font-size: 26px; font-weight: 800; color: var(--deep); margin-bottom: 6px; }
+    .subtitle { color: var(--muted); font-size: 13px; }
+
+    /* ── 총점 카드 ── */
+    .score-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .sc {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      text-align: center;
+    }
+    .sc .lbl { font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 4px; }
+    .sc .val { font-size: 22px; font-weight: 800; }
+    .sc .val.b { color: var(--brity); }
+    .sc .val.n { color: var(--naver); }
+
+    /* ── 섹션 타이틀 ── */
+    .sec-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--deep);
+      margin: 24px 0 10px;
+      padding-left: 10px;
+      border-left: 4px solid var(--blue);
+    }
+
+    /* ── 범례 ── */
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 8px 16px;
+      margin-bottom: 10px;
+      font-size: 11px; color: var(--muted);
+      align-items: center;
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .dot {
+      display: inline-block;
+      width: 10px; height: 10px; border-radius: 2px;
+    }
+    .dot.b-win  { background: var(--brity); }
+    .dot.n-win  { background: var(--naver); }
+    .dot.equal  { background: #aabbcc; }
+    .dot.b-only { background: #9b59b6; }
+
+    /* ── 테이블 ── */
+    .tbl-wrap {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,.06);
+      margin-bottom: 28px;
+    }
+    table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    thead th {
+      position: sticky; top: 0; z-index: 2;
+      background: #1a3a6b;
+      color: #fff;
+      font-size: 12px; font-weight: 700;
+      padding: 11px 10px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+    thead th:last-child { border-right: none; }
+    tbody td {
+      padding: 12px 10px;
+      vertical-align: top;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    tbody td:last-child { border-right: none; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* 행 배경 */
+    tbody tr:nth-child(even) td { background: #f9fbfd; }
+
+    /* Level-2 셀 */
+    .lv2 {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--deep);
+      white-space: nowrap;
+    }
+    .lv2-sub { font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 3px; }
+
+    /* 점수 셀 */
+    .score-cell { text-align: center; }
+    .moon {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid #8c96a6;
+      background: conic-gradient(#1e3d70 var(--fill), #e8edf3 0);
+      margin: 0 auto 6px;
+    }
+    .moon.na {
+      background: repeating-linear-gradient(45deg, #eef2f6 0 4px, #cdd5df 4px 8px);
+    }
+    .score-num {
+      font-size: 18px; font-weight: 800;
+      display: block;
+    }
+    .score-num.b { color: var(--brity); }
+    .score-num.n { color: var(--naver); }
+    .score-num.na { color: var(--gray); font-size: 14px; }
+    .score-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* 판정 */
+    .badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 5px 10px; border-radius: 20px;
+      font-size: 12px; font-weight: 800;
+      white-space: nowrap;
+    }
+    .badge.b-win  { background: #dbeafe; color: #1e40af; }
+    .badge.n-win  { background: #dcfce7; color: #15803d; }
+    .badge.equal  { background: #f1f5f9; color: #475569; }
+    .badge.b-only { background: #ede9fe; color: #6d28d9; }
+
+    /* 평가근거 */
+    .eval { font-size: 12px; color: #243044; line-height: 1.55; }
+    .eval b { color: var(--deep); }
+    .eval .b-tag { color: var(--brity); font-weight: 700; }
+    .eval .n-tag { color: #079248; font-weight: 700; }
+
+    /* 사용성 점수쌍 */
+    .ux-pair { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+    .ux-item { text-align: center; min-width: 60px; }
+    .ux-lbl  { font-size: 10px; color: var(--muted); margin-bottom: 4px; }
+    .ux-val  { font-size: 15px; font-weight: 800; }
+    .ux-val.b { color: var(--brity); }
+    .ux-val.n { color: var(--naver); }
+    .ux-val.na { color: var(--gray); }
+
+    /* 출처 */
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 8px;
+      padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── 헤더 ── -->
+  <div class="hero">
+    <div class="eyebrow">삼성SDS 브리티웍스 기능 진단 · KPMG 삼정회계법인 · Level 2 집계</div>
+    <h1>📱 메신저 기능 비교 — Brity Works vs Naver Works</h1>
+    <p class="subtitle">기능성 진단(기능 보유 수준) + 사용성 진단(직관성·간결성)을 Level 2 기준으로 집계한 비교표입니다.</p>
+    <div class="score-row">
+      <div class="sc">
+        <div class="lbl">기능성 종합 · Brity</div>
+        <div class="val b">4.06</div>
+      </div>
+      <div class="sc">
+        <div class="lbl">기능성 종합 · Naver</div>
+        <div class="val n">2.93</div>
+      </div>
+      <div class="sc">
+        <div class="lbl">사용성(직/간) · Brity</div>
+        <div class="val b">4.73 / 4.89</div>
+      </div>
+      <div class="sc">
+        <div class="lbl">사용성(직/간) · Naver</div>
+        <div class="val n">4.41 / 4.71</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       기능성 진단
+  ══════════════════════════════════ -->
+  <div class="sec-title">▌ 기능성 진단 평가 (5점 척도)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- 채팅 -->
+        <tr>
+          <td class="lv2">
+            채팅
+            <div class="lv2-sub">채팅방 관리 · 대화 관리</div>
+          </td>
+          <td class="score-cell">
+            <div class="moon" style="--fill:87%"></div>
+            <span class="score-num b">4.35</span>
+            <div class="score-sub">채팅방 4.2 / 대화 4.5</div>
+          </td>
+          <td class="score-cell">
+            <div class="moon" style="--fill:72%"></div>
+            <span class="score-num n">3.60</span>
+            <div class="score-sub">채팅방 3.7 / 대화 3.5</div>
+          </td>
+          <td style="text-align:center">
+            <span class="badge b-win">Brity 우위</span>
+          </td>
+          <td class="eval">
+            <b>채팅방 관리:</b> <span class="b-tag">Brity Works</span>는 세부 채팅 기능의 다양성에서 앞서며, 메일·결재·일정·게시 등 Brity 솔루션 내 서비스 간 Seamless 연계 지원<br><br>
+            <b>대화 관리:</b> <span class="b-tag">Brity Works</span>는 비밀대화·안심대화·주말/야간/해외 메시지 Alert 기능 단독 보유로 보안·안전 대화 차별화 포인트 보유. <span class="n-tag">Naver Works</span>는 기본 채팅 기능 수준
+          </td>
+        </tr>
+
+        <!-- 협업 공간 -->
+        <tr>
+          <td class="lv2">
+            협업 공간
+            <div class="lv2-sub">협업공간 생성 · 관리 · 대화 관리</div>
+          </td>
+          <td class="score-cell">
+            <div class="moon" style="--fill:77%"></div>
+            <span class="score-num b">3.83</span>
+            <div class="score-sub">생성 3.0 / 관리 4.0 / 대화 4.5</div>
+          </td>
+          <td class="score-cell">
+            <div class="moon na"></div>
+            <span class="score-num na">미보유</span>
+            <div class="score-sub">해당 기능 없음</div>
+          </td>
+          <td style="text-align:center">
+            <span class="badge b-only">Brity 단독</span>
+          </td>
+          <td class="eval">
+            <span class="n-tag">Naver Works</span>는 워크스페이스(협업공간) 기능 <b>미보유</b>. <span class="b-tag">Brity Works</span> 단독 제공 영역.<br><br>
+            <b>협업공간 생성:</b> 업무 목적별 별도 협업공간(스레드 형식) 생성 가능<br>
+            <b>협업공간 관리:</b> 생성된 협업공간 구성원 및 채널 관리 기능 제공<br>
+            <b>협업공간 대화 관리:</b> 협업공간 내 업무 분담·커뮤니케이션·파일 공유 등 다양한 협업 지원
+          </td>
+        </tr>
+
+        <!-- 쪽지 -->
+        <tr>
+          <td class="lv2">
+            쪽지
+            <div class="lv2-sub">쪽지 생성 · 수발신 · 목록 관리</div>
+          </td>
+          <td class="score-cell">
+            <div class="moon" style="--fill:80%"></div>
+            <span class="score-num b">4.00</span>
+            <div class="score-sub">생성 4.0 / 수발신 4.0 / 목록 4.0</div>
+          </td>
+          <td class="score-cell">
+            <div class="moon na"></div>
+            <span class="score-num na">미보유</span>
+            <div class="score-sub">해당 기능 없음</div>
+          </td>
+          <td style="text-align:center">
+            <span class="badge b-only">Brity 단독</span>
+          </td>
+          <td class="eval">
+            <span class="b-tag">Brity Works</span> <b>단독 보유 기능</b>. <span class="n-tag">Naver Works</span>는 쪽지 기능 미보유.<br><br>
+            지정 사용자에게 1:1 커뮤니케이션 및 협업을 위해 채팅 이외 동기방식 소통 수단 제공<br>
+            쪽지함 목록 관리 포함, 수신/발신 쪽지 관리 체계 구축 가능
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- ══════════════════════════════════
+       사용성 진단
+  ══════════════════════════════════ -->
+  <div class="sec-title">▌ 사용성 진단 평가 (5점 척도 · 직관성 / 간결성)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- 채팅 사용성 -->
+        <tr>
+          <td class="lv2">
+            채팅
+            <div class="lv2-sub">대화 관리 · 채팅방 관리</div>
+          </td>
+          <td class="score-cell">
+            <div class="ux-pair">
+              <div class="ux-item">
+                <div class="ux-lbl">직관성</div>
+                <div class="ux-val b">4.47</div>
+              </div>
+              <div class="ux-item">
+                <div class="ux-lbl">간결성</div>
+                <div class="ux-val b">4.73</div>
+              </div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">대화관리 4.33/4.67 · 채팅방 4.60/4.80</div>
+          </td>
+          <td class="score-cell">
+            <div class="ux-pair">
+              <div class="ux-item">
+                <div class="ux-lbl">직관성</div>
+                <div class="ux-val n">4.92</div>
+              </div>
+              <div class="ux-item">
+                <div class="ux-lbl">간결성</div>
+                <div class="ux-val n">4.92</div>
+              </div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">대화관리 4.93/4.93 · 채팅방 4.90/4.90</div>
+          </td>
+          <td style="text-align:center">
+            <span class="badge n-win">Naver 우위</span>
+          </td>
+          <td class="eval">
+            <b>대화 관리:</b> <span class="n-tag">Naver Works</span> 직관성·간결성 모두 1위. 대화 내 첨부 시 첨부 및 투표 아이콘이 직관적이고 상호작용도 간편함<br><br>
+            <b>채팅방 관리:</b> <span class="n-tag">Naver Works</span> 직관성·간결성 모두 1위. 단체 채팅방 개설 시 조직도 버튼 노출이 직관적이고 추가도 1클릭으로 간결함
+          </td>
+        </tr>
+
+        <!-- 협업 공간 사용성 -->
+        <tr>
+          <td class="lv2">
+            협업 공간
+            <div class="lv2-sub">협업공간 개설 · 관리 · 대화 관리</div>
+          </td>
+          <td class="score-cell">
+            <div class="ux-pair">
+              <div class="ux-item">
+                <div class="ux-lbl">직관성</div>
+                <div class="ux-val b">4.73</div>
+              </div>
+              <div class="ux-item">
+                <div class="ux-lbl">간결성</div>
+                <div class="ux-val b">4.93</div>
+              </div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">개설 4.60/5.00 · 관리 4.60/4.80 · 대화 5.00/5.00</div>
+          </td>
+          <td class="score-cell">
+            <div class="ux-pair">
+              <div class="ux-item">
+                <div class="ux-lbl">직관성</div>
+                <div class="ux-val n">3.90</div>
+              </div>
+              <div class="ux-item">
+                <div class="ux-lbl">간결성</div>
+                <div class="ux-val n">4.50</div>
+              </div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">개설 3.40/4.60 · 관리 미보유 · 대화 4.40/4.40</div>
+          </td>
+          <td style="text-align:center">
+            <span class="badge b-win">Brity 우위</span>
+          </td>
+          <td class="eval">
+            <b>협업공간 개설:</b> <span class="b-tag">Brity Works</span> 직관성·간결성 모두 1위. 워크스페이스 개설 아이콘이 왼쪽 사이드바 최상단에 명확히 노출되어 바로 진입 가능<br><br>
+            <b>협업공간 관리:</b> <span class="b-tag">Brity Works</span> 직관성·간결성 모두 1위. 우측 상단 + 아이콘으로 멤버 직관적·간결 관리. <span class="n-tag">Naver Works</span>는 해당 기능 미보유<br><br>
+            <b>협업공간 대화 관리:</b> <span class="b-tag">Brity Works</span> 직관성 5.0·간결성 5.0 / <span class="n-tag">Naver Works</span> 직관성 4.4·간결성 4.4. 파일 드라이브 연계·멘션·이모지 Icon UI 전반 직관적·간결함
+          </td>
+        </tr>
+
+        <!-- 쪽지 사용성 -->
+        <tr>
+          <td class="lv2">
+            쪽지
+            <div class="lv2-sub">쪽지 생성</div>
+          </td>
+          <td class="score-cell">
+            <div class="ux-pair">
+              <div class="ux-item">
+                <div class="ux-lbl">직관성</div>
+                <div class="ux-val b">5.00</div>
+              </div>
+              <div class="ux-item">
+                <div class="ux-lbl">간결성</div>
+                <div class="ux-val b">5.00</div>
+              </div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">쪽지 생성 5.00 / 5.00</div>
+          </td>
+          <td class="score-cell">
+            <div class="moon na" style="width:38px;height:38px;margin:0 auto 6px"></div>
+            <span class="score-num na">미보유</span>
+            <div class="score-sub">해당 기능 없음</div>
+          </td>
+          <td style="text-align:center">
+            <span class="badge b-only">Brity 단독</span>
+          </td>
+          <td class="eval">
+            <span class="b-tag">Brity Works</span> <b>직관성·간결성 모두 1위 (5.0 만점)</b>. <span class="n-tag">Naver Works</span>는 쪽지 기능 미보유로 평가 미해당.<br><br>
+            Brity Works만 해당 기능 보유 — 1:1 동기 방식 소통 수단으로 채팅과 차별화된 별도 커뮤니케이션 채널 제공
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    출처: 삼성SDS 브리티웍스 기능 진단 및 고도화 전략 수립 — 솔루션 기능비교 결과서 (KPMG 삼정회계법인)<br>
+    * 기능성 평가: 5개 솔루션 공통 보유 기능 기준 상대 평가 / 사용성 평가: 공공부문 업무 시나리오 기반 5점 척도 / 동등 수준 판단 기준: 점수 격차 0.1점 이내
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coforge Q&amp;A 정리 — 2026.05.28</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    color: #fff;
+    padding: 40px 32px 32px;
+  }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #e0e8ff;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; color: #a0b4d6; }
+
+  .toc {
+    background: #fff;
+    margin: 24px 24px 0;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .toc h2 { font-size: 13px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: #0f3460; text-decoration: none; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+
+  .section {
+    background: #fff;
+    margin: 16px 24px 0;
+    border-radius: 12px;
+    padding: 28px 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .section:last-child { margin-bottom: 32px; }
+
+  .section-num {
+    display: inline-block;
+    background: #0f3460;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f3460;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e8edf5;
+  }
+
+  .q-block {
+    background: #f0f4ff;
+    border-left: 4px solid #4a7fc1;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: #2c3e6b;
+    font-weight: 600;
+  }
+  .q-block::before { content: "Q. "; color: #4a7fc1; }
+
+  .a-block {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 12px;
+  }
+  thead tr { background: #0f3460; color: #fff; }
+  thead th { padding: 10px 12px; text-align: center; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #f7f9fc; }
+  tbody tr:hover { background: #eef2ff; }
+  tbody td { padding: 9px 12px; text-align: center; border-bottom: 1px solid #e8edf5; }
+  tbody td:first-child { text-align: left; font-weight: 600; color: #0f3460; }
+  .num { text-align: right !important; font-variant-numeric: tabular-nums; }
+
+  .highlight { color: #e63946; font-weight: 700; }
+  .note { font-size: 12px; color: #888; margin-top: 10px; line-height: 1.6; }
+
+  .case-card {
+    border: 1px solid #e0e8f5;
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-top: 12px;
+  }
+  .case-card + .case-card { margin-top: 10px; }
+  .case-num {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #0f3460;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .case-card h4 { font-size: 14px; color: #0f3460; margin-bottom: 8px; }
+  .case-card ul { padding-left: 18px; font-size: 13px; color: #444; }
+  .case-card ul li { margin-bottom: 4px; }
+  .tag { display: inline-block; background: #0f3460; color: #fff; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; }
+  .tag.travel { background: #1a7f5a; }
+
+  .insight-box {
+    background: linear-gradient(135deg, #f0f4ff, #e8f5e9);
+    border: 1px solid #c5d8f5;
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 13px;
+    color: #333;
+    margin-top: 14px;
+  }
+  .insight-box strong { color: #0f3460; }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    padding: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">Mir Digital Assistant · 미르 Q&amp;A 정리</div>
+  <h1>Coforge 관련 Q&amp;A 정리</h1>
+  <div class="subtitle">2026년 5월 28일 &nbsp;|&nbsp; 보좌: Mir Kim</div>
+</div>
+
+<!-- 목차 -->
+<div class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#q1">Coforge 5개년 매출 (USD) — CAGR 22% 검증</a></li>
+    <li><a href="#q2">시장 트렌드의 의미 — 코어뱅킹·NDC 현대화</a></li>
+    <li><a href="#q3">코어뱅킹 현대화 Coforge 사업 사례 2개</a></li>
+    <li><a href="#q4">항공사 NDC 현대화 Coforge 사업 사례 2개</a></li>
+    <li><a href="#q5">5개년 재무실적 INR → USD 전체 변환표</a></li>
+  </ol>
+</div>
+
+<!-- Q1 -->
+<div class="section" id="q1">
+  <div class="section-num">Q1</div>
+  <h2>Coforge 5개년 매출 (USD) — CAGR 22% 검증</h2>
+  <div class="q-block">Coforge 자체 매출 CAGR 약 22%라고 하는데, 최근 5년 매출을 USD로 뽑아줘.</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>회계연도</th>
+        <th>매출 (USD)</th>
+        <th>전년 대비 성장률</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>FY2020</td><td class="num">$0.60B</td><td class="num">+5.1%</td></tr>
+      <tr><td>FY2021</td><td class="num">$0.80B</td><td class="num">+32.5%</td></tr>
+      <tr><td>FY2022</td><td class="num">$0.95B</td><td class="num">+18.4%</td></tr>
+      <tr><td>FY2023</td><td class="num">$1.08B</td><td class="num">+14.4%</td></tr>
+      <tr><td>FY2024</td><td class="num">$1.30B</td><td class="num">+20.1%</td></tr>
+      <tr><td>FY2025 (추정)</td><td class="num highlight">~$1.42B</td><td class="num">~+32% (CC 기준)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box" style="margin-top:16px;">
+    <strong>CAGR 검증 결과</strong><br>
+    · FY2020 → FY2024 (4개년): CAGR = <strong class="highlight">21.3%</strong> → "약 22%" 주장에 근접<br>
+    · FY2020 → FY2025 (5개년): CAGR = <strong>18.8%</strong><br>
+    · 결론: "약 22%" 주장은 <strong>4개년 기준</strong> 계산 시 성립. 엄밀히는 <strong>19~22% 범위</strong>가 정확.
+  </div>
+  <p class="note">출처: companiesmarketcap.com / Coforge FY25 공식 Press Release</p>
+</div>
+
+<!-- Q2 -->
+<div class="section" id="q2">
+  <div class="section-num">Q2</div>
+  <h2>시장 트렌드의 의미 — 코어뱅킹·NDC 현대화</h2>
+  <div class="q-block">리포트의 '차세대 코어뱅킹 현대화, 항공사 NDC 현대화' 내용은 '26년 현재 시장의 트렌드인가? 아니면 Coforge가 타겟한 BFSI 시장 트렌드인가?</div>
+
+  <div class="a-block">
+    리포트 "주요 시장 규모 및 현황" 섹션의 원문:<br>
+    <em style="color:#555; font-size:13px; display:block; margin:8px 0 8px 12px; border-left:3px solid #ccc; padding-left:10px;">
+      "생성형 AI(GenAI) 도입 가속으로 BFSI·여행·제조 전 산업에 걸쳐 IT 아웃소싱 수요가 증가하고 있습니다.<br>
+      클라우드 마이그레이션, 차세대 코어뱅킹, 항공사 NDC 현대화 등 대형 전환 프로젝트가 증가 중입니다."
+    </em>
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>구분</th><th>설명</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>전체 시장 트렌드</td>
+        <td style="text-align:left">2026년 현재 글로벌 IT 아웃소싱 시장에서 레거시 현대화·클라우드 전환 수요가 실제로 폭발 중인 거시 트렌드</td>
+      </tr>
+      <tr>
+        <td>Coforge 포지셔닝</td>
+        <td style="text-align:left">그 중 Coforge가 BFSI(금융)·여행(항공)을 집중 수직산업으로 삼아, 해당 트렌드의 수혜를 직접 받는 구조</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <strong>결론:</strong> <strong>둘 다이지만 주어는 전 세계 IT 시장.</strong><br>
+    "세상이 이 방향으로 움직이고 있고, Coforge가 그 정확한 자리에 서 있다"는 맥락.<br>
+    시장 트렌드가 먼저 존재하고, Coforge가 그것을 타깃으로 삼은 것.
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="section" id="q3">
+  <div class="section-num">Q3</div>
+  <h2>차세대 코어뱅킹 현대화 — Coforge 사업 사례 2개</h2>
+  <div class="q-block">차세대 코어뱅킹 현대화에 대한 Coforge의 사업 예시를 2개만 들어줘.</div>
+
+  <div class="case-card">
+    <div class="case-num"><span class="tag">BFSI</span> 사례 ①</div>
+    <h4>영국 Fortune 100 글로벌 은행 자회사 (유럽 4위 규모) — IBM COBOL 현대화</h4>
+    <ul>
+      <li><strong>배경:</strong> 수십 년간 운영한 IBM Mainframe COBOL 기반 코어뱅킹의 확장성 한계, 운영비 급증</li>
+      <li><strong>Coforge 수행:</strong> IBM COBOL → Microfocus COBOL on UNIX 전면 마이그레이션, 클라우드 준비(Cloud-ready) 아키텍처 전환</li>
+      <li><strong>성과:</strong> 비즈니스 중단 제로(Zero Downtime), 확장성·민첩성·비용 효율 동시 개선, 향후 클라우드 이전 기반 완성</li>
+    </ul>
+  </div>
+
+  <div class="case-card">
+    <div class="case-num"><span class="tag">BFSI</span> 사례 ②</div>
+    <h4>유럽 협동조합 은행 (Co-operative Bank) — TBA → 클라우드 CBS 전환</h4>
+    <ul>
+      <li><strong>배경:</strong> 노후화된 TBA(Total Bank Automation) 시스템으로 디지털 전환 불가 상태</li>
+      <li><strong>Coforge 수행:</strong> 기존 TBA → 클라우드 기반 통합 CBS(Core Banking System) 구축 및 전환</li>
+      <li><strong>성과:</strong> CAPEX(설비투자) 없이 전환 완료, 1,500개 이상 빌트인 리포트 즉시 제공, 운영 비용 절감</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="section" id="q4">
+  <div class="section-num">Q4</div>
+  <h2>항공사 NDC 현대화 — Coforge 사업 사례 2개</h2>
+  <div class="q-block">항공사 NDC 현대화에 대한 Coforge의 사업 예시를 2개만 들어줘.</div>
+
+  <div class="a-block" style="font-size:13px; color:#555; margin-bottom:12px;">
+    NDC(New Distribution Capability) = IATA가 주도하는 차세대 항공 유통 표준. GDS 중심 구조에서 항공사 직접 판매(Offer·Order 체계)로의 전환을 의미.
+  </div>
+
+  <div class="case-card">
+    <div class="case-num"><span class="tag travel">Travel</span> 사례 ①</div>
+    <h4>스페인 유럽-중남미 1위 항공그룹 — ITA QPX 기반 NDC 구현</h4>
+    <ul>
+      <li><strong>배경:</strong> 기존 이커머스 채널과 NDC 채널 간 운임/상품 불일치로 옴니채널 고객경험 훼손</li>
+      <li><strong>Coforge 수행:</strong> ITA QPX 기반 NDC 구현, 전 노선 운임 설정·채널 간 Parity 확보, NDC-이커머스 쇼핑 일관성 테스트</li>
+      <li><strong>성과:</strong> NDC 채널과 이커머스 채널 간 요금·상품 완전 일치 달성, 직접 판매 어드레서블 마켓 확장</li>
+    </ul>
+  </div>
+
+  <div class="case-card">
+    <div class="case-num"><span class="tag travel">Travel</span> 사례 ②</div>
+    <h4>유럽 대형 항공사 — Offer Order Management 구현 품질 검증</h4>
+    <ul>
+      <li><strong>배경:</strong> PSS 기반 구조에서 IATA 차세대 표준 Offer·Order 체계로 전환 추진</li>
+      <li><strong>Coforge 수행:</strong> 신규 Offer Order Management System 전방위 비즈니스 프로세스 테스팅 전담 (NDC·GDS·모바일·DCS·파트너 항공사·수익관리시스템 전 채널 커버), Playwright 기반 자동화 회귀 테스트 프레임워크 구축</li>
+      <li><strong>성과:</strong> 구현 리스크 최소화, 출시 전 채널 전반 품질 검증 완료</li>
+    </ul>
+  </div>
+
+  <div class="insight-box">
+    <strong>추가:</strong> Coforge는 2025년 <strong>Aeronova.AI</strong>를 출시 — 항공사의 OOSD(Offer·Order·Settlement·Delivery) 전환을 가속하는 자체 AI 프레임워크 보유.
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="section" id="q5">
+  <div class="section-num">Q5</div>
+  <h2>5개년 재무실적 INR → USD 전체 변환표</h2>
+  <div class="q-block">리포트 5개년 재무실적이 인도루피와 크로어로 되어있는데, USD로 변환해서 표를 다시 만들어줘.</div>
+
+  <p style="font-size:13px; color:#555; margin-bottom:12px;">각 회계연도 종료일(3월 31일) 기준 USD/INR 환율 적용. 1 Crore = 1,000만 INR.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>연도</th>
+        <th>환율 (₹/USD)</th>
+        <th>매출액</th>
+        <th>영업이익</th>
+        <th>순이익</th>
+        <th>EPS</th>
+        <th>ROE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>FY2021 (Mar)</td>
+        <td class="num">73.1</td>
+        <td class="num highlight">$638M</td>
+        <td class="num">$107M</td>
+        <td class="num">$64M</td>
+        <td class="num">$0.21</td>
+        <td class="num">약 16%</td>
+      </tr>
+      <tr>
+        <td>FY2022 (Mar)</td>
+        <td class="num">75.9</td>
+        <td class="num highlight">$847M</td>
+        <td class="num">$145M</td>
+        <td class="num">$94M</td>
+        <td class="num">$0.29</td>
+        <td class="num">약 19%</td>
+      </tr>
+      <tr>
+        <td>FY2023 (Mar)</td>
+        <td class="num">82.2</td>
+        <td class="num highlight">$975M</td>
+        <td class="num">$156M</td>
+        <td class="num">$91M</td>
+        <td class="num">$0.28</td>
+        <td class="num">약 18%</td>
+      </tr>
+      <tr>
+        <td>FY2024 (Mar)</td>
+        <td class="num">83.4</td>
+        <td class="num highlight">$1,080M</td>
+        <td class="num">$174M</td>
+        <td class="num">$100M</td>
+        <td class="num">$0.31</td>
+        <td class="num">약 19%</td>
+      </tr>
+      <tr>
+        <td>FY2025 (Mar)</td>
+        <td class="num">85.4</td>
+        <td class="num highlight">$1,411M</td>
+        <td class="num">$198M</td>
+        <td class="num">$110M</td>
+        <td class="num">$0.28</td>
+        <td class="num">약 15%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:16px;">
+    <p style="font-size:13px; margin-bottom:6px;"><strong>원본 INR 대조표</strong></p>
+    <table>
+      <thead>
+        <tr><th>연도</th><th>매출액 (INR)</th><th>영업이익</th><th>순이익</th><th>EPS</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FY2021</td><td class="num">₹4,663 Cr</td><td class="num">₹781 Cr</td><td class="num">₹466 Cr</td><td class="num">₹15.04</td></tr>
+        <tr><td>FY2022</td><td class="num">₹6,432 Cr</td><td class="num">₹1,102 Cr</td><td class="num">₹715 Cr</td><td class="num">₹21.73</td></tr>
+        <tr><td>FY2023</td><td class="num">₹8,015 Cr</td><td class="num">₹1,282 Cr</td><td class="num">₹745 Cr</td><td class="num">₹22.72</td></tr>
+        <tr><td>FY2024</td><td class="num">₹9,009 Cr</td><td class="num">₹1,447 Cr</td><td class="num">₹836 Cr</td><td class="num">₹26.14</td></tr>
+        <tr><td>FY2025</td><td class="num">₹12,051 Cr</td><td class="num">₹1,694 Cr</td><td class="num">₹936 Cr</td><td class="num">₹24.29</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-box">
+    <strong>핵심 포인트</strong><br>
+    · 매출 5년 성장: $638M → $1,411M (+121%), CAGR 약 <strong class="highlight">21.9%</strong><br>
+    · FY2025 EPS 하락 원인: 매출·이익은 성장했으나 <strong>Encora 인수(2024년) 주식 발행</strong>으로 주식 수 증가 → EPS 희석 효과
+  </div>
+</div>
+
+<div class="footer">
+  미르(Mir) 디지털 비서 &nbsp;·&nbsp; 보좌: Mir Kim &nbsp;·&nbsp; 2026.05.28
+</div>
+
+</body>
+</html>

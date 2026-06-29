@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coforge 5개년 재무성과 — FY2021~FY2025</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', 'Apple SD Gothic Neo', Arial, sans-serif;
+  background: #f0f4f8;
+  color: #1a202c;
+  padding: 24px 16px 60px;
+}
+.page-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.page-header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a3c6e;
+}
+.page-header p {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #718096;
+}
+.badge {
+  display: inline-block;
+  background: #ebf4ff;
+  color: #2b6cb0;
+  border: 1px solid #bee3f8;
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.09);
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+/* 헤더 */
+thead tr {
+  background: #1a3c6e;
+  color: #fff;
+}
+thead th {
+  padding: 12px 10px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  white-space: nowrap;
+}
+thead th:first-child {
+  text-align: left;
+  padding-left: 16px;
+  min-width: 180px;
+}
+thead th:last-child { border-right: none; color: #ffd700; }
+
+/* 섹션 구분 타이틀 */
+tr.section-head td {
+  background: #2d3748;
+  color: #e2e8f0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+}
+
+/* 서비스 라인 행 */
+tr.svc td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #edf2f7;
+  vertical-align: middle;
+  text-align: center;
+}
+tr.svc td:first-child {
+  text-align: left;
+  padding-left: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  border-left: 4px solid var(--accent, #4a90e2);
+}
+tr.svc:nth-child(even) td { background: #f8fafc; }
+tr.svc:nth-child(odd) td { background: #fff; }
+
+.amt { font-weight: 700; color: #1a202c; }
+.pct { font-size: 10.5px; color: #718096; display: block; margin-top: 1px; }
+.pct-pos { color: #276749; }
+.pct-neg { color: #c53030; }
+
+/* Total 행 */
+tr.total-row td {
+  background: #1a3c6e;
+  color: #fff;
+  padding: 11px 10px;
+  font-weight: 800;
+  text-align: center;
+  border-top: 2px solid #2b6cb0;
+}
+tr.total-row td:first-child {
+  text-align: left;
+  padding-left: 16px;
+  border-left: 4px solid #ffd700;
+}
+tr.total-row .pct { color: #90cdf4; }
+
+/* 구분선 */
+tr.divider td {
+  height: 2px;
+  background: linear-gradient(90deg, #1a3c6e, #4a90e2, #1a3c6e);
+  padding: 0;
+}
+
+/* 수익성 지표 행 */
+tr.metric-a td {
+  padding: 9px 10px;
+  background: #ebf4ff;
+  border-bottom: 1px solid #bee3f8;
+  text-align: center;
+  color: #1a202c;
+}
+tr.metric-a td:first-child {
+  text-align: left;
+  padding-left: 16px;
+  font-weight: 600;
+  color: #2b6cb0;
+  border-left: 4px solid #3182ce;
+}
+
+/* 기업 지표 행 */
+tr.metric-b td {
+  padding: 9px 10px;
+  background: #f0fff4;
+  border-bottom: 1px solid #c6f6d5;
+  text-align: center;
+  color: #1a202c;
+}
+tr.metric-b td:first-child {
+  text-align: left;
+  padding-left: 16px;
+  font-weight: 600;
+  color: #276749;
+  border-left: 4px solid #38a169;
+}
+tr.metric-b:last-child td { border-bottom: none; }
+
+.cagr-col { font-weight: 800; color: #ffd700; }
+tr.metric-a .cagr-col,
+tr.metric-b .cagr-col { color: #2b6cb0; }
+tr.metric-b .cagr-col { color: #276749; }
+
+/* 주석 */
+.footnotes {
+  margin-top: 20px;
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  font-size: 11px;
+  color: #718096;
+  line-height: 1.8;
+}
+.footnotes strong { color: #2d3748; }
+.source-box {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 10.5px;
+  color: #a0aec0;
+  border-left: 3px solid #cbd5e0;
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Coforge Limited — 5개년 재무성과</h1>
+  <p>FY2021 ~ FY2025 서비스 부문별 매출 · 수익성 · 기업 핵심 지표</p>
+  <span class="badge">USD 기준 · 회계연도 종료: 3월 31일 · 2026.06.16 작성</span>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>구분</th>
+      <th>FY2021</th>
+      <th>FY2022</th>
+      <th>FY2023</th>
+      <th>FY2024</th>
+      <th>FY2025</th>
+      <th>5Y CAGR</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- ── 서비스 부문별 매출 ── -->
+    <tr class="section-head"><td colspan="7">▌ 서비스 부문별 매출 (USD M · 비중%)</td></tr>
+
+    <!-- Engineering -->
+    <tr class="svc" style="--accent:#2563eb;">
+      <td>Engineering ①</td>
+      <td><span class="amt">$267M</span><span class="pct">(42.5%)</span></td>
+      <td><span class="amt">$319M</span><span class="pct">(36.8%)</span></td>
+      <td><span class="amt">$364M</span><span class="pct">(36.3%)</span></td>
+      <td><span class="amt">$394M</span><span class="pct">(35.2%)</span></td>
+      <td><span class="amt">$598M</span><span class="pct">(41.3%)</span></td>
+      <td><span class="cagr-col">22.3%</span></td>
+    </tr>
+
+    <!-- Intelligent Automation & AI -->
+    <tr class="svc" style="--accent:#7c3aed;">
+      <td>Intelligent Automation &amp; AI</td>
+      <td><span class="amt">$94M</span><span class="pct">(15.0%)</span></td>
+      <td><span class="amt">$120M</span><span class="pct">(13.8%)</span></td>
+      <td><span class="amt">$120M</span><span class="pct">(12.0%)</span></td>
+      <td><span class="amt">$129M</span><span class="pct">(11.5%)</span></td>
+      <td><span class="amt">$133M</span><span class="pct">(9.2%)</span></td>
+      <td><span class="cagr-col">9.1%</span></td>
+    </tr>
+
+    <!-- Data & Integration -->
+    <tr class="svc" style="--accent:#0694a2;">
+      <td>Data &amp; Integration</td>
+      <td><span class="amt">$126M</span><span class="pct">(20.1%)</span></td>
+      <td><span class="amt">$180M</span><span class="pct">(20.8%)</span></td>
+      <td><span class="amt">$235M</span><span class="pct">(23.5%)</span></td>
+      <td><span class="amt">$279M</span><span class="pct">(24.9%)</span></td>
+      <td><span class="amt">$340M</span><span class="pct">(23.5%)</span></td>
+      <td><span class="cagr-col">28.2%</span></td>
+    </tr>
+
+    <!-- CIMS -->
+    <tr class="svc" style="--accent:#38a169;">
+      <td>CIMS (Cloud &amp; Infra)</td>
+      <td><span class="amt">$130M</span><span class="pct">(20.7%)</span></td>
+      <td><span class="amt">$155M</span><span class="pct">(17.9%)</span></td>
+      <td><span class="amt">$183M</span><span class="pct">(18.3%)</span></td>
+      <td><span class="amt">$214M</span><span class="pct">(19.1%)</span></td>
+      <td><span class="amt">$259M</span><span class="pct">(17.9%)</span></td>
+      <td><span class="cagr-col">18.8%</span></td>
+    </tr>
+
+    <!-- BPM -->
+    <tr class="svc" style="--accent:#ed8936;">
+      <td>Business Process Mgmt. ②</td>
+      <td><span class="amt">$11M</span><span class="pct">(1.7%)</span></td>
+      <td><span class="amt">$93M</span><span class="pct">(10.7%)</span></td>
+      <td><span class="amt">$99M</span><span class="pct">(9.9%)</span></td>
+      <td><span class="amt">$105M</span><span class="pct">(9.4%)</span></td>
+      <td><span class="amt">$117M</span><span class="pct">(8.1%)</span></td>
+      <td><span class="cagr-col" style="color:#ed8936; font-size:11px;">† N/M</span></td>
+    </tr>
+
+    <!-- Total -->
+    <tr class="total-row">
+      <td>Total</td>
+      <td><span class="amt">$628M</span><span class="pct">(100%)</span></td>
+      <td><span class="amt">$867M</span><span class="pct">(100%)</span></td>
+      <td><span class="amt">$1,002M</span><span class="pct">(100%)</span></td>
+      <td><span class="amt">$1,119M</span><span class="pct">(100%)</span></td>
+      <td><span class="amt">$1,448M</span><span class="pct">(100%)</span></td>
+      <td><span class="cagr-col">23.2%</span></td>
+    </tr>
+
+    <tr class="divider"><td colspan="7"></td></tr>
+
+    <!-- ── 수익성 지표 ── -->
+    <tr class="section-head"><td colspan="7">▌ 수익성 지표</td></tr>
+
+    <tr class="metric-a">
+      <td>영업이익 (EBIT)</td>
+      <td>$81M</td>
+      <td>$120M</td>
+      <td>$143M</td>
+      <td>$146M</td>
+      <td>$155M</td>
+      <td style="color:#2b6cb0; font-weight:700;">—</td>
+    </tr>
+    <tr class="metric-a">
+      <td>영업이익률</td>
+      <td>12.9%</td>
+      <td>13.8%</td>
+      <td>14.3%</td>
+      <td>13.0%</td>
+      <td>10.7%</td>
+      <td style="color:#2b6cb0; font-weight:700;">—</td>
+    </tr>
+
+    <tr class="divider"><td colspan="7"></td></tr>
+
+    <!-- ── 기업 핵심 지표 ── -->
+    <tr class="section-head"><td colspan="7">▌ 기업 핵심 지표</td></tr>
+
+    <tr class="metric-b">
+      <td>ROE ③</td>
+      <td>~20%E</td>
+      <td>25.5%</td>
+      <td>23.9%</td>
+      <td>24.1%</td>
+      <td>~17%</td>
+      <td style="color:#276749; font-weight:700;">—</td>
+    </tr>
+    <tr class="metric-b">
+      <td>기업가치 (Market Cap) ④</td>
+      <td>~$3.8B</td>
+      <td>~$3.9B</td>
+      <td>~$3.1B</td>
+      <td>~$4.5B</td>
+      <td>~$6.4B</td>
+      <td style="color:#276749; font-weight:700;">—</td>
+    </tr>
+    <tr class="metric-b">
+      <td>매출 YoY</td>
+      <td>+12.1%</td>
+      <td>+38.0%</td>
+      <td>+15.6%</td>
+      <td>+11.7%</td>
+      <td>+29.4%</td>
+      <td style="color:#276749; font-weight:700;">—</td>
+    </tr>
+    <tr class="metric-b">
+      <td>인당매출 (연평균) ⑤</td>
+      <td>$54.9K</td>
+      <td>$49.7K</td>
+      <td>$43.8K</td>
+      <td>$46.7K</td>
+      <td>$50.1K</td>
+      <td style="color:#276749; font-weight:700;">—</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<!-- 주석 -->
+<div class="footnotes">
+  <strong>주석 및 분류 기준</strong><br><br>
+
+  <strong>① Engineering 분류 변환 (FY25 기준 통일)</strong><br>
+  · FY21: Product Engineering (15.7%) + ADM [Application Dev &amp; Maintenance] (26.8%) → 합산 42.5%<br>
+  · FY22~FY24: Product Engineering + Software Engineering (ADM 명칭 변경) → 합산 36.8~35.2%<br>
+  · FY25: Coforge가 Engineering 단일 카테고리로 통합 (Cigniti QE/Digital Assurance 포함 영향으로 41.3%로 상승)<br><br>
+
+  <strong>② BPM (Business Process Management) 유의사항 †</strong><br>
+  · FY21 BPM 비중 1.7%는 SLK Global 인수 이전 수치 (인수: Q1FY22, April 2021, $120M)<br>
+  · SLK 인수 이후 FY22부터 BPM 비중이 10%대로 급등 → 5Y CAGR은 인수효과로 N/M (Meaningless)<br>
+  · FY22→FY25 3Y CAGR 기준: +8.2%<br><br>
+
+  <strong>③ ROE 계산 기준</strong><br>
+  · 연결 기준 / PAT (지배주주 귀속) ÷ 기초·기말 자기자본 평균<br>
+  · FY21: FY20 자기자본 데이터 미확보로 추정값(E)<br>
+  · FY25: Cigniti 합병으로 자기자본 급증 (비지배지분 ₹1,950억 편입) → ROE 희석<br><br>
+
+  <strong>④ 기업가치 (Market Cap 기준, 순차입금 조정 전)</strong><br>
+  · 주가: EquityPandit 스플릿 조정 기준 (1:4 보너스 이슈 반영, ~335M 주식 기준)<br>
+  · FY25 이후 Encora 인수(2026.04)로 신주 +93.8M 발행 → FY25 이전은 ~335M 주식으로 산정<br>
+  · Coforge는 FY21~FY25 내내 순현금(Net Cash) 포지션 → EV ≈ Market Cap (±$50~100M 범위)<br><br>
+
+  <strong>⑤ 인당매출 계산 기준</strong><br>
+  · 연평균 임직원 수 = (기초 + 기말) ÷ 2 (분기 내부 데이터 미반영)<br>
+  · FY21 기초: ~10,500명 추정 (Q2FY21 = 11,162명 참고)<br>
+  · FY22: SLK 인수 Q1FY22에 BPS 인력 대거 편입 → 단순 평균 17,446명 (실제 평균 약 20,000명 추정)<br>
+  · IT Billable 기준 인당매출(FY25: $64.5K/FY26: $71.8K)과 별도로 전체 임직원 기준으로 산정<br>
+</div>
+
+<div class="source-box">
+  <strong>출처:</strong>
+  Coforge Q4FY22 Factsheet · Q4FY24 Factsheet · Q4FY26 Investor Presentation &amp; Factsheet (공식 IR 자료) ·
+  EquityPandit 주가 히스토리 · StockAnalysis.com 시가총액 데이터 ·
+  INR/USD: 각 회계연도 종료일(3월 31일) 기준 Factsheet 환율 적용
+  (FY21: 73.17 / FY22: 75.90 / FY23: 82.11 / FY24: 83.37 / FY25: 85.40)
+</div>
+
+</body>
+</html>

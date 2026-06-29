@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>화상회의 기능 비교 · Brity Works vs Naver Works</title>
+  <style>
+    :root{--blue:#0b4a8f;--deep:#12345c;--naver:#03c75a;--brity:#1e6cbf;--line:#d8dee8;--soft:#f4f7fb;--text:#172033;--muted:#687386;--green:#157a45;--gray:#6c7480;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#eef2f7;color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;font-size:13px;line-height:1.5;}
+    .page{max-width:1400px;margin:0 auto;padding:28px 20px;}
+    .hero{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 28px 20px;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    .eyebrow{color:var(--blue);font-size:12px;font-weight:700;margin-bottom:6px;}
+    h1{font-size:26px;font-weight:800;color:var(--deep);margin-bottom:6px;}
+    .subtitle{color:var(--muted);font-size:13px;}
+    .score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;}
+    .sc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px 14px;text-align:center;}
+    .sc .lbl{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px;}
+    .sc .val{font-size:22px;font-weight:800;}
+    .sc .val.b{color:var(--brity);}
+    .sc .val.n{color:var(--naver);}
+    .sec-title{font-size:16px;font-weight:800;color:var(--deep);margin:24px 0 10px;padding-left:10px;border-left:4px solid var(--blue);}
+    .domain-bar{font-size:14px;font-weight:800;color:#fff;margin:22px 0 8px;padding:9px 16px;background:var(--blue);border-radius:6px;}
+    .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:10px;font-size:11px;color:var(--muted);align-items:center;}
+    .legend span{display:inline-flex;align-items:center;gap:5px;}
+    .dot{display:inline-block;width:10px;height:10px;border-radius:2px;}
+    .dot.b-win{background:var(--brity);}
+    .dot.n-win{background:var(--naver);}
+    .dot.equal{background:#aabbcc;}
+    .dot.b-only{background:#9b59b6;}
+    .tbl-wrap{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:auto;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    table{width:100%;min-width:900px;border-collapse:separate;border-spacing:0;}
+    thead th{position:sticky;top:0;z-index:2;background:#1a3a6b;color:#fff;font-size:12px;font-weight:700;padding:11px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.15);}
+    thead th:last-child{border-right:none;}
+    tbody td{padding:12px 10px;vertical-align:top;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+    tbody td:last-child{border-right:none;}
+    tbody tr:last-child td{border-bottom:none;}
+    tbody tr:nth-child(even) td{background:#f9fbfd;}
+    .lv2{font-weight:800;font-size:14px;color:var(--deep);white-space:nowrap;}
+    .lv2-sub{font-size:11px;color:var(--muted);font-weight:400;margin-top:3px;}
+    .score-cell{text-align:center;}
+    .moon{width:38px;height:38px;border-radius:50%;border:1.5px solid #8c96a6;background:conic-gradient(#1e3d70 var(--fill),#e8edf3 0);margin:0 auto 6px;}
+    .moon.na{background:repeating-linear-gradient(45deg,#eef2f6 0 4px,#cdd5df 4px 8px);}
+    .score-num{font-size:18px;font-weight:800;display:block;}
+    .score-num.b{color:var(--brity);}
+    .score-num.n{color:var(--naver);}
+    .score-num.na{color:var(--gray);font-size:14px;}
+    .score-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+    .badge{display:inline-flex;align-items:center;justify-content:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap;}
+    .badge.b-win{background:#dbeafe;color:#1e40af;}
+    .badge.n-win{background:#dcfce7;color:#15803d;}
+    .badge.equal{background:#f1f5f9;color:#475569;}
+    .badge.b-only{background:#ede9fe;color:#6d28d9;}
+    .eval{font-size:12px;color:#243044;line-height:1.55;}
+    .eval b{color:var(--deep);}
+    .eval .b-tag{color:var(--brity);font-weight:700;}
+    .eval .n-tag{color:#079248;font-weight:700;}
+    .ux-pair{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+    .ux-item{text-align:center;min-width:60px;}
+    .ux-lbl{font-size:10px;color:var(--muted);margin-bottom:4px;}
+    .ux-val{font-size:15px;font-weight:800;}
+    .ux-val.b{color:var(--brity);}
+    .ux-val.n{color:var(--naver);}
+    .ux-val.na{color:var(--gray);}
+    .no-ux-note{background:#f8f9fb;border:1px dashed var(--line);border-radius:8px;padding:10px 14px;color:var(--muted);font-size:12px;margin-bottom:20px;}
+    .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:8px;padding-bottom:20px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="eyebrow">삼성SDS 브리티웍스 기능 진단 · KPMG 삼정회계법인 · Level 2 집계</div>
+    <h1>🎥 화상회의 기능 비교 — Brity Works vs Naver Works</h1>
+    <p class="subtitle">기능성 진단(기능 보유 수준) + 사용성 진단(직관성·간결성)을 Level 2 기준으로 집계한 비교표입니다.</p>
+    <div class="score-row">
+      <div class="sc"><div class="lbl">기능성 종합 · Brity</div><div class="val b">4.43</div></div>
+      <div class="sc"><div class="lbl">기능성 종합 · Naver</div><div class="val n">2.99</div></div>
+      <div class="sc"><div class="lbl">사용성(직/간) · Brity</div><div class="val b">4.90 / 4.85</div></div>
+      <div class="sc"><div class="lbl">사용성(직/간) · Naver</div><div class="val n">4.80 / 4.93</div></div>
+    </div>
+  </div>
+
+  <div class="sec-title">▌ 기능성 진단 평가 (5점 척도)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">회의 개설<div class="lv2-sub">회의 예약</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:100%"></div>
+            <span class="score-num b">5.0</span>
+            <div class="score-sub">회의 예약 5.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:94%"></div>
+            <span class="score-num n">4.7</span>
+            <div class="score-sub">회의 예약 4.7</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>회의 예약:</b> <span class="b-tag">Brity Works</span>는 타사 솔루션 4개 대비 우위. 미래 회의 예약 및 진행까지 원스톱 지원. <span class="n-tag">Naver Works</span>는 캘린더 일정 생성 기능 기반으로 회의 예약 기능 제공</td>
+        </tr>
+        <tr>
+          <td class="lv2">회의 관리<div class="lv2-sub">회의 목록 조회 · 회의 정보 관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:84%"></div>
+            <span class="score-num b">4.2</span>
+            <div class="score-sub">목록조회 4.5 / 정보관리 3.9</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:35%"></div>
+            <span class="score-num n">1.75</span>
+            <div class="score-sub">목록조회 0.0 / 정보관리 3.5</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>회의 목록 조회:</b> <span class="b-tag">Brity Works</span>는 오늘·예정·상시·전체 등 세분화된 조회 기능 보유로 타사 4개 대비 우위. <span class="n-tag">Naver Works</span>는 해당 기능 미보유<br><br><b>회의 정보 관리:</b> <span class="b-tag">Brity Works</span>는 전문 용어 인식, 권환 설정 기능 세분화(설문·참석자·녹화·종료 권한 등). MS Teams 대비 열위</td>
+        </tr>
+        <tr>
+          <td class="lv2">회의 진행<div class="lv2-sub">회의 입장 전 장치 설정 · 참석자 관리 · 컨텐츠 공유 · 회의 참여 지원</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:82%"></div>
+            <span class="score-num b">4.08</span>
+            <div class="score-sub">장치설정 3.0 / 참석자 4.5 / 컨텐츠 4.3 / 참여지원 4.5</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:51%"></div>
+            <span class="score-num n">2.53</span>
+            <div class="score-sub">장치설정 4.0 / 참석자 2.0 / 컨텐츠 2.0 / 참여지원 2.1</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>회의 입장 전 장치 설정:</b> <span class="n-tag">Naver Works</span> · M365 공동 1위. 화면 회전, 화면 필터 설정 기능 제공<br><br><b>참석자 관리:</b> <span class="b-tag">Brity Works</span>는 타사 4개 대비 우위. 회의 참석 요청(메신저·메일), 참석자와 메신저로 대화, 회의 진행권 부여 기능 제공<br><br><b>컨텐츠 공유:</b> <span class="b-tag">Brity Works</span>는 문서 공유 옵션 세분화(다른 페이지 보기 등), 화면 동기화 기능 제공<br><br><b>회의 참여 지원:</b> <span class="b-tag">Brity Works</span>는 언어 인식 및 자막/통역 제공, 회의 내용 질의/응답 기능(AI), 타사 4개 대비 우위</td>
+        </tr></tbody></table></div>
+
+  <div class="sec-title">▌ 사용성 진단 평가 (5점 척도 · 직관성 / 간결성)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">회의 개설<div class="lv2-sub">회의 예약</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">5.0</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.8</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">회의 예약 5.00 / 4.80</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">5.0</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">5.0</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">회의 예약 5.00 / 5.00</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>회의 예약:</b> Dooray 제외 모두 높게 평가됨. <span class="n-tag">Naver Works</span>는 간결성 5.0으로 1위. <span class="b-tag">Brity Works</span>는 직관성 5.0 동등이나 간결성 4.8로 소폭 열위</td>
+        </tr>
+        <tr>
+          <td class="lv2">회의 진행<div class="lv2-sub">회의 입장 전 장치 설정 · 컨텐츠 공유</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.8</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.9</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">장치설정 5.00/5.00 · 컨텐츠공유 4.60/4.80</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.6</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">4.85</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">장치설정 4.60/5.00 · 컨텐츠공유 4.60/4.70</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>회의 입장 전 장치 설정:</b> <span class="b-tag">Brity Works</span>·M365 공동 1위. 오디오·마이크 테스트 기능 버튼 노출 명확하고 간결함<br><br><b>컨텐츠 공유:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span> 직관성 공동 2위(펜 툴 기능이 접혀 추가 클릭 필요). 간결성은 양사 공동 2위</td>
+        </tr></tbody></table></div>
+
+  <div class="footer">출처: 삼성SDS 브리티웍스 기능 진단 및 고도화 전략 수립 — 솔루션 기능비교 결과서 (KPMG 삼정회계법인)<br>* 기능성 평가: 5개 솔루션 공통 보유 기능 기준 상대 평가 / 사용성 평가: 공공부문 업무 시나리오 기반 5점 척도 / 동등 수준 판단 기준: 점수 격차 0.1점 이내</div>
+</div>
+</body>
+</html>

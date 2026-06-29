@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coforge 조직도 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0f4f8;
+    color: #1a202c;
+    padding: 30px 20px 60px;
+  }
+
+  /* ── 헤더 ── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .page-header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a3c6e;
+    letter-spacing: -0.5px;
+  }
+  .page-header p {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #718096;
+  }
+  .badge {
+    display: inline-block;
+    background: #ebf4ff;
+    color: #2b6cb0;
+    border: 1px solid #bee3f8;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  /* ── 섹션 타이틀 ── */
+  .section-title {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #a0aec0;
+    margin: 40px 0 16px;
+  }
+
+  /* ── 커넥터 라인 ── */
+  .connector {
+    text-align: center;
+    line-height: 1;
+    color: #cbd5e0;
+    font-size: 22px;
+    margin: 4px 0;
+  }
+
+  /* ── CEO 카드 ── */
+  .ceo-wrap { display: flex; justify-content: center; }
+  .ceo-card {
+    background: linear-gradient(135deg, #1a3c6e 0%, #2563eb 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 24px 40px;
+    text-align: center;
+    min-width: 280px;
+    box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+  }
+  .ceo-card .role {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    opacity: 0.75;
+    text-transform: uppercase;
+  }
+  .ceo-card .name {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 6px 0 4px;
+  }
+  .ceo-card .desc {
+    font-size: 12px;
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+
+  /* ── C레벨 그리드 ── */
+  .clevel-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .clevel-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 22px;
+    text-align: center;
+    min-width: 190px;
+    flex: 1 1 180px;
+    max-width: 220px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-top: 4px solid #2563eb;
+    transition: transform 0.2s;
+  }
+  .clevel-card:hover { transform: translateY(-3px); }
+  .clevel-card .role {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #2563eb;
+    text-transform: uppercase;
+  }
+  .clevel-card .name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 5px 0 4px;
+  }
+  .clevel-card .desc {
+    font-size: 11px;
+    color: #718096;
+    line-height: 1.5;
+  }
+
+  /* ── 이사회 ── */
+  .board-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .board-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+    border-left: 3px solid #48bb78;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    min-width: 160px;
+    flex: 1 1 150px;
+    max-width: 200px;
+  }
+  .board-card .role {
+    font-size: 10px;
+    font-weight: 700;
+    color: #38a169;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .board-card .name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a202c;
+    margin-top: 4px;
+  }
+
+  /* ── Division 섹션 ── */
+  .div-section {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .div-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+  .div-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    flex: 1 1 280px;
+    max-width: 320px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    border-top: 5px solid var(--accent);
+  }
+  .div-card .div-icon {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+  .div-card .div-name {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1a202c;
+    margin-bottom: 4px;
+  }
+  .div-card .div-revenue {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .div-card .div-desc {
+    font-size: 12px;
+    color: #4a5568;
+    line-height: 1.7;
+  }
+  .div-card .div-sub {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 11px;
+    color: #718096;
+  }
+  .div-card .div-sub span {
+    display: inline-block;
+    background: #edf2f7;
+    border-radius: 4px;
+    padding: 2px 7px;
+    margin: 2px 2px;
+    font-weight: 600;
+  }
+
+  /* ── 역량(Capability) 섹션 ── */
+  .cap-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .cap-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    flex: 1 1 200px;
+    max-width: 230px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-left: 4px solid var(--accent, #7c3aed);
+  }
+  .cap-card .cap-icon { font-size: 20px; margin-bottom: 6px; }
+  .cap-card .cap-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 5px;
+  }
+  .cap-card .cap-desc {
+    font-size: 11px;
+    color: #718096;
+    line-height: 1.6;
+  }
+
+  /* ── 자회사 ── */
+  .sub-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .sub-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 22px;
+    flex: 1 1 240px;
+    max-width: 270px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    border-top: 4px solid #f6ad55;
+  }
+  .sub-card .sub-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1a202c;
+    margin-bottom: 4px;
+  }
+  .sub-card .sub-year {
+    font-size: 11px;
+    color: #e67e22;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .sub-card .sub-desc {
+    font-size: 12px;
+    color: #4a5568;
+    line-height: 1.6;
+  }
+
+  /* ── 지역 ── */
+  .geo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .geo-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    flex: 1 1 160px;
+    max-width: 190px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .geo-card .geo-flag { font-size: 28px; margin-bottom: 6px; }
+  .geo-card .geo-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 4px;
+  }
+  .geo-card .geo-pct {
+    font-size: 20px;
+    font-weight: 800;
+    color: #2563eb;
+  }
+  .geo-card .geo-label { font-size: 11px; color: #a0aec0; }
+
+  /* ── 범례 ── */
+  .legend {
+    max-width: 700px;
+    margin: 50px auto 0;
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .legend h3 {
+    font-size: 13px;
+    color: #a0aec0;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #4a5568;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  /* ── 주석 ── */
+  .footnote {
+    text-align: center;
+    font-size: 11px;
+    color: #a0aec0;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     헤더
+══════════════════════════════════════════ -->
+<div class="page-header">
+  <h1>Coforge Limited — 조직도</h1>
+  <p>글로벌 AI 엔지니어링 & 도메인 특화 IT 서비스 기업</p>
+  <span class="badge">2026년 6월 기준 · NSE/BSE 상장 · 시가총액 약 $42억</span>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     1. 이사회 (Board of Directors)
+══════════════════════════════════════════ -->
+<div class="section-title">▌ 이사회 (Board of Directors)</div>
+<div class="board-grid">
+  <div class="board-card">
+    <div class="role">CEO & Executive Director</div>
+    <div class="name">Sudhir Singh</div>
+  </div>
+  <div class="board-card">
+    <div class="role">Non-Executive Director</div>
+    <div class="name">Mary Beth Boucher</div>
+  </div>
+  <div class="board-card">
+    <div class="role">Independent Director</div>
+    <div class="name">Anil Kumar Chanana</div>
+  </div>
+  <div class="board-card">
+    <div class="role">Independent Director</div>
+    <div class="name">Durgesh Kumar Singh</div>
+  </div>
+  <div class="board-card">
+    <div class="role">Independent Director</div>
+    <div class="name">Om Prakash Bhatt</div>
+  </div>
+  <div class="board-card">
+    <div class="role">Non-Executive Director (2026.04~)</div>
+    <div class="name">Shweta Jalan</div>
+  </div>
+  <div class="board-card">
+    <div class="role">Non-Executive Director (2026.04~)</div>
+    <div class="name">Atin Hirachand Jain</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     2. CEO
+══════════════════════════════════════════ -->
+<div class="connector">▼</div>
+<div class="section-title">▌ 경영진 최고위 (Chief Executive)</div>
+<div class="ceo-wrap">
+  <div class="ceo-card">
+    <div class="role">CEO & Executive Director</div>
+    <div class="name">Sudhir Singh</div>
+    <div class="desc">
+      전략 방향 수립 · 전사 P&amp;L 책임 · 대형 딜 총괄<br>
+      FY25 매출 성장률 32% CC 달성 주도
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     3. C-레벨 임원진
+══════════════════════════════════════════ -->
+<div class="connector">▼</div>
+<div class="section-title">▌ C-레벨 임원진 (C-Suite Executives)</div>
+<div class="clevel-grid">
+
+  <div class="clevel-card">
+    <div class="role">COO</div>
+    <div class="name">Sunil Fernandes</div>
+    <div class="desc">운영 총괄 · 딜리버리 품질 관리<br>2026년 4월 승진 취임</div>
+  </div>
+
+  <div class="clevel-card">
+    <div class="role">CFO</div>
+    <div class="name">Saurabh Goel</div>
+    <div class="desc">재무 전략 · M&amp;A 실행 · 투자자 관계(IR)<br>Encora 인수 $2.5B 자금 조달 주도</div>
+  </div>
+
+  <div class="clevel-card">
+    <div class="role">Chief Customer Success Officer</div>
+    <div class="name">John Speight</div>
+    <div class="desc">고객 성공·장기 관계 관리<br>대형 계약 유지·확장 전담</div>
+  </div>
+
+  <div class="clevel-card">
+    <div class="role">CHRO</div>
+    <div class="name">(Human Resources)</div>
+    <div class="desc">전사 인재 전략 · 조직 문화<br>임직원 35,777명 (FY26) 관리</div>
+  </div>
+
+  <div class="clevel-card">
+    <div class="role">CTO / Chief AI Officer</div>
+    <div class="name">(Technology & AI)</div>
+    <div class="desc">AI 엔지니어링 전략·플랫폼<br>Encora 통합 후 AI역량 가속</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     4. 사업 Division (Vertical)
+══════════════════════════════════════════ -->
+<div class="connector">▼</div>
+<div class="section-title">▌ 산업 Division (Industry Verticals)</div>
+<div class="div-section">
+<div class="div-grid">
+
+  <!-- BFS -->
+  <div class="div-card" style="--accent:#2563eb; --accent-light:#ebf4ff;">
+    <div class="div-icon">🏦</div>
+    <div class="div-name">BFS<br><span style="font-size:12px;font-weight:400;color:#718096;">Banking &amp; Financial Services</span></div>
+    <div class="div-revenue">매출 비중 ~32%</div>
+    <div class="div-desc">
+      소매·기업 금융, 자산관리, 결제 플랫폼 등 금융사의 디지털 전환 지원.<br>
+      Temenos, Finacle 등 코어 뱅킹 플랫폼 기반 구현 및 운영 아웃소싱.
+    </div>
+    <div class="div-sub">
+      주요 역량:
+      <span>Core Banking</span><span>Payments</span><span>Lending</span><span>Regulatory Compliance</span>
+    </div>
+  </div>
+
+  <!-- Insurance -->
+  <div class="div-card" style="--accent:#7c3aed; --accent-light:#f3e8ff;">
+    <div class="div-icon">🛡️</div>
+    <div class="div-name">Insurance</div>
+    <div class="div-revenue">매출 비중 ~22%</div>
+    <div class="div-desc">
+      P&amp;C, 생명보험, 연금, 중개인 대상 엔드투엔드 폴리시 라이프사이클 관리.<br>
+      SLK Global 인수로 보험 BPO 역량 대폭 강화. 독자 플랫폼 보유.
+    </div>
+    <div class="div-sub">
+      주요 역량:
+      <span>Policy Admin</span><span>Claims</span><span>Underwriting</span><span>BPS</span>
+    </div>
+  </div>
+
+  <!-- Travel -->
+  <div class="div-card" style="--accent:#0694a2; --accent-light:#e0f7fa;">
+    <div class="div-icon">✈️</div>
+    <div class="div-name">Travel &amp; Transportation</div>
+    <div class="div-revenue">매출 비중 ~20%</div>
+    <div class="div-desc">
+      항공사, OTA, 물류 기업 대상 예약·스케줄링·수익 관리 시스템 구축.<br>
+      Sabre와 13년 장기 계약(대형 딜) 체결이 대표 레퍼런스.
+    </div>
+    <div class="div-sub">
+      주요 역량:
+      <span>GDS Integration</span><span>Revenue Mgmt</span><span>Logistics Tech</span>
+    </div>
+  </div>
+
+  <!-- Healthcare -->
+  <div class="div-card" style="--accent:#e53e3e; --accent-light:#fff5f5;">
+    <div class="div-icon">🏥</div>
+    <div class="div-name">Healthcare &amp; Life Sciences</div>
+    <div class="div-revenue">매출 비중 ~10%</div>
+    <div class="div-desc">
+      의료기관·제약사·의료기기 기업의 디지털 헬스 전환 지원.<br>
+      EHR 통합, 임상 데이터 분석, 규제 컴플라이언스(FDA, HIPAA) 특화.
+    </div>
+    <div class="div-sub">
+      주요 역량:
+      <span>EHR/EMR</span><span>Clinical Analytics</span><span>HIPAA Compliance</span>
+    </div>
+  </div>
+
+  <!-- Public Sector -->
+  <div class="div-card" style="--accent:#38a169; --accent-light:#f0fff4;">
+    <div class="div-icon">🏛️</div>
+    <div class="div-name">Public Sector &amp; Government</div>
+    <div class="div-revenue">매출 비중 ~8%</div>
+    <div class="div-desc">
+      정부·공공기관 대상 디지털 정부 전환, 사이버보안, 인프라 현대화 지원.<br>
+      미국·영국·인도 정부 프로젝트 레퍼런스 보유.
+    </div>
+    <div class="div-sub">
+      주요 역량:
+      <span>Digital Gov</span><span>Cybersecurity</span><span>Legacy Modernization</span>
+    </div>
+  </div>
+
+  <!-- Manufacturing -->
+  <div class="div-card" style="--accent:#ed8936; --accent-light:#fffaf0;">
+    <div class="div-icon">🏭</div>
+    <div class="div-name">Manufacturing &amp; Other</div>
+    <div class="div-revenue">매출 비중 ~8%</div>
+    <div class="div-desc">
+      제조, 에너지, 미디어 등 기타 산업 대상 ERP(SAP), IoT, 공급망 최적화.<br>
+      SAP S/4HANA 마이그레이션, Industry 4.0 솔루션 제공.
+    </div>
+    <div class="div-sub">
+      주요 역량:
+      <span>SAP S/4HANA</span><span>IoT</span><span>Supply Chain</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     5. 서비스 역량 (Capability Lines)
+══════════════════════════════════════════ -->
+<div class="connector">▼</div>
+<div class="section-title">▌ 핵심 서비스 역량 (Capability Lines)</div>
+<div class="cap-grid">
+
+  <div class="cap-card" style="--accent:#2563eb;">
+    <div class="cap-icon">🤖</div>
+    <div class="cap-name">AI Engineering</div>
+    <div class="cap-desc">생성형 AI·ML 모델 개발·배포. Encora 인수로 AI-native 역량 전면 확보. 산업별 AI 솔루션 구현.</div>
+  </div>
+
+  <div class="cap-card" style="--accent:#0694a2;">
+    <div class="cap-icon">☁️</div>
+    <div class="cap-name">Cloud &amp; Infrastructure (CIMS)</div>
+    <div class="cap-desc">AWS·Azure·GCP 마이그레이션, 클라우드 운영 관리, 인프라 현대화 서비스 제공.</div>
+  </div>
+
+  <div class="cap-card" style="--accent:#7c3aed;">
+    <div class="cap-icon">📊</div>
+    <div class="cap-name">Data &amp; Analytics</div>
+    <div class="cap-desc">데이터 플랫폼 구축, BI·대시보드, 예측 분석, 데이터 거버넌스 체계 수립.</div>
+  </div>
+
+  <div class="cap-card" style="--accent:#e53e3e;">
+    <div class="cap-icon">🔍</div>
+    <div class="cap-name">Digital Assurance / QE</div>
+    <div class="cap-desc">Cigniti 인수로 QA·테스트 자동화 역량 내재화. AI 기반 테스트 수명주기 관리.</div>
+  </div>
+
+  <div class="cap-card" style="--accent:#ed8936;">
+    <div class="cap-icon">⚙️</div>
+    <div class="cap-name">BPS (Business Process Solutions)</div>
+    <div class="cap-desc">SLK Global 기반 보험·금융 백오피스 BPO 운영. AI 자동화로 BPS → Intelligent Operations 전환 중.</div>
+  </div>
+
+  <div class="cap-card" style="--accent:#38a169;">
+    <div class="cap-icon">🖥️</div>
+    <div class="cap-name">ERP / SAP</div>
+    <div class="cap-desc">SAP S/4HANA 구현·마이그레이션·운영 지원. 제조·공공 분야 대형 ERP 프로젝트 수행.</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     6. 주요 자회사 (Subsidiaries)
+══════════════════════════════════════════ -->
+<div class="connector">▼</div>
+<div class="section-title">▌ 주요 자회사 (Key Subsidiaries)</div>
+<div class="sub-grid">
+
+  <div class="sub-card">
+    <div class="sub-name">SLK Global Solutions</div>
+    <div class="sub-year">인수: 2021년 4월 · $120M (₹918Cr)</div>
+    <div class="sub-desc">
+      인도 기반 BPM/BPO 기업. 보험·금융 백오피스 처리 전문.<br>
+      60% 지분 인수 → Insurance 및 BFS Division 역량 강화.
+    </div>
+  </div>
+
+  <div class="sub-card">
+    <div class="sub-name">Cigniti Technologies</div>
+    <div class="sub-year">인수: 2024년 · $120M</div>
+    <div class="sub-desc">
+      인도 기반 Digital Assurance & QE(품질 엔지니어링) 기업.<br>
+      AI 기반 테스트 자동화 플랫폼 BlazeMeter 포함.
+    </div>
+  </div>
+
+  <div class="sub-card">
+    <div class="sub-name">Encora</div>
+    <div class="sub-year">인수: 2026년 · $2,500M (역대 최대)</div>
+    <div class="sub-desc">
+      미국 기반 AI-native IT 아웃소싱 기업.<br>
+      Coforge의 AI Engineering 역량을 글로벌 수준으로 도약시키는 전략적 인수.
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     7. 지역별 매출 (Geographic Segments)
+══════════════════════════════════════════ -->
+<div class="connector">▼</div>
+<div class="section-title">▌ 지역별 매출 구성 (Geographic Revenue)</div>
+<div class="geo-grid">
+
+  <div class="geo-card">
+    <div class="geo-flag">🇺🇸</div>
+    <div class="geo-name">North America</div>
+    <div class="geo-pct">~53%</div>
+    <div class="geo-label">최대 매출 지역</div>
+  </div>
+
+  <div class="geo-card">
+    <div class="geo-flag">🇬🇧</div>
+    <div class="geo-name">Europe</div>
+    <div class="geo-pct">~25%</div>
+    <div class="geo-label">영국·독일 중심</div>
+  </div>
+
+  <div class="geo-card">
+    <div class="geo-flag">🇮🇳</div>
+    <div class="geo-name">India</div>
+    <div class="geo-pct">~12%</div>
+    <div class="geo-label">본사 · 딜리버리 허브</div>
+  </div>
+
+  <div class="geo-card">
+    <div class="geo-flag">🌏</div>
+    <div class="geo-name">Rest of World</div>
+    <div class="geo-pct">~10%</div>
+    <div class="geo-label">중동·APAC 등</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     범례 & 주석
+══════════════════════════════════════════ -->
+<div class="legend">
+  <h3>색상 범례</h3>
+  <div class="legend-items">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#38a169;"></div>이사회 (Board)
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#2563eb;"></div>C-레벨 임원
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#7c3aed;"></div>Insurance Division
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#0694a2;"></div>Travel Division
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#e53e3e;"></div>Healthcare Division
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:#ed8936;"></div>Manufacturing / 자회사
+    </div>
+  </div>
+</div>
+
+<div class="footnote">
+  출처: Coforge 공식 IR 자료, Business Standard, Tracxn, Moneyworks4me · 2026년 6월 기준 작성<br>
+  일부 임원명은 공개 정보 기준이며, 내부 조직 세부구조는 비공개일 수 있습니다.
+</div>
+
+</body>
+</html>

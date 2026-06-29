@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIIT 그룹 역사 & 지분구조 — 2026.06.10</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif; background: #f4f6f9; color: #1a1a2e; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);
+    color: #fff;
+    padding: 40px 32px 32px;
+  }
+  .header .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #e0e8ff;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; color: #a0b4d6; }
+
+  .toc {
+    background: #fff;
+    margin: 24px 24px 0;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .toc h2 { font-size: 13px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: #0f3460; text-decoration: none; font-size: 14px; }
+  .toc a:hover { text-decoration: underline; }
+
+  .section {
+    background: #fff;
+    margin: 16px 24px 0;
+    border-radius: 12px;
+    padding: 28px 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .section:last-child { margin-bottom: 32px; }
+
+  .section-num {
+    display: inline-block;
+    background: #0f3460;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f3460;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e8edf5;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  th {
+    background: #0f3460;
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #e8edf5;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f7f9fc; }
+  tr:last-child td { border-bottom: none; }
+
+  .highlight {
+    background: #f0f4ff;
+    border-left: 4px solid #4a7fc1;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 14px 0;
+    font-size: 14px;
+    color: #2c3e6b;
+  }
+
+  .timeline-flow {
+    background: #1a1a2e;
+    color: #a0e0ff;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    padding: 20px 24px;
+    border-radius: 10px;
+    line-height: 2;
+    margin-top: 14px;
+    white-space: pre;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .tag-blue { background: #dce8ff; color: #1a4fa0; }
+  .tag-green { background: #d4f5e2; color: #1a6e3c; }
+  .tag-red { background: #ffe0e0; color: #a01a1a; }
+  .tag-gray { background: #e8e8e8; color: #555; }
+
+  .note {
+    font-size: 13px;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  .stake-bar-wrap { margin-top: 14px; }
+  .stake-row { display: flex; align-items: center; margin-bottom: 8px; font-size: 13px; }
+  .stake-label { width: 180px; color: #444; flex-shrink: 0; }
+  .stake-bar-bg { flex: 1; background: #e8edf5; border-radius: 6px; height: 18px; overflow: hidden; }
+  .stake-bar { height: 18px; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; color: #fff; font-size: 12px; font-weight: 600; }
+  .bar-promoter { background: #0f3460; }
+  .bar-fii { background: #4a7fc1; }
+  .bar-dii { background: #2ecc71; }
+  .bar-public { background: #f39c12; }
+  .bar-govt { background: #95a5a6; }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: #aaa;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="badge">COFORGE 심층 리서치</div>
+  <h1>NIIT 그룹 역사 & 지분구조</h1>
+  <div class="subtitle">Pace Education(1981) → NIIT Limited → NIIT Technologies → Coforge 전 과정 정리 | 2026.06.10</div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#s1">NIIT 탄생 (1981~1993)</a></li>
+    <li><a href="#s2">NIIT Technologies 탄생 방식 (1992~2004)</a></li>
+    <li><a href="#s3">NIIT Group · NIIT Limited · NIIT Tech 관계 정의</a></li>
+    <li><a href="#s4">Baring PE 인수 → Coforge 리브랜딩 (2019~2020)</a></li>
+    <li><a href="#s5">NIIT Learning Systems Limited 역사</a></li>
+    <li><a href="#s6">전체 흐름 타임라인</a></li>
+    <li><a href="#s7">NIIT Limited 현재 지분구조</a></li>
+    <li><a href="#s8">NIIT Learning Systems 현재 지분구조</a></li>
+  </ol>
+</div>
+
+<!-- S1 -->
+<div class="section" id="s1">
+  <div class="section-num">01</div>
+  <h2>NIIT 탄생 (1981~1993)</h2>
+  <table>
+    <tr><th>항목</th><th>내용</th></tr>
+    <tr><td>최초 법인명</td><td><strong>Pace Education Private Limited</strong></td></tr>
+    <tr><td>설립일</td><td>1981년 12월 2일</td></tr>
+    <tr><td>창업자</td><td>Rajendra S. Pawar · Vijay K. Thadani · S.S. Nadar · Kiran Nadar (IIT Delhi 졸업생)</td></tr>
+    <tr><td>초기 자본</td><td>100만 루피 (약 1,200만 원 수준)</td></tr>
+    <tr><td>사업 목적</td><td>IT 교육·훈련 노하우 개발·판매·보급</td></tr>
+    <tr><td>1982년</td><td>뭄바이·델리 최초 컴퓨터 교육센터 개설</td></tr>
+    <tr><td>1987년</td><td>프랜차이즈 모델 도입 → 전국 9개 센터 확장</td></tr>
+    <tr><td>1988년 10월</td><td>공개법인(Public Limited)으로 전환</td></tr>
+    <tr><td>1990년 11월</td><td><strong>NIIT Limited</strong>로 공식 명칭 변경</td></tr>
+    <tr><td>1993년</td><td>BSE(500304) · NSE(NIITLTD) 상장</td></tr>
+  </table>
+  <div class="highlight" style="margin-top:16px;">
+    상장 당시 지분구조: Pawar 패밀리 + Thadani 패밀리가 프로모터로서 과반 지분 보유. 정확한 % 수치는 공식 프로스펙터스(BSE 원문)에만 존재하며 온라인 공개 DB 미확인.
+  </div>
+</div>
+
+<!-- S2 -->
+<div class="section" id="s2">
+  <div class="section-num">02</div>
+  <h2>NIIT Technologies 탄생 방식 (1992~2004)</h2>
+  <div class="highlight">
+    <strong>분리 방식: 인적분할(Spin-off) ❌ → 자회사 신설 후 IPO ✅</strong>
+  </div>
+  <table style="margin-top:14px;">
+    <tr><th>시점</th><th>내용</th></tr>
+    <tr><td>1992년 5월 13일</td><td>NIIT Limited가 <strong>100% 출자</strong>로 <strong>NIIT Investments Private Limited</strong> 신설<br><span class="note">목적: NIIT 그룹의 소프트웨어 수출·IT 서비스 사업 전담</span></td></tr>
+    <tr><td>2003~2004년</td><td>NIIT Limited 이사회, Scheme of Arrangement 승인<br>→ <strong>Global Solutions Business(IT 서비스 전체)</strong>를 자회사로 공식 이전</td></tr>
+    <tr><td>2004년 5월 14일</td><td>법인명 <strong>NIIT Technologies Limited</strong>으로 변경</td></tr>
+    <tr><td>2004년</td><td>BSE · NSE <strong>IPO 상장</strong><br>NIIT Limited가 프로모터(50%+ 지분) 유지</td></tr>
+  </table>
+  <div class="highlight" style="margin-top:14px;">
+    핵심 구분: 1992년 NIIT Investments 설립은 <strong>NIIT Limited가 새 법인에 자본을 출자</strong>한 것. 기존 사업부를 쪼개 주주에게 신주를 배정하는 인적분할과는 다른 구조. 실질적인 사업 이전은 2003~2004년 Scheme of Arrangement(물적분할)에서 이루어짐.
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="section" id="s3">
+  <div class="section-num">03</div>
+  <h2>NIIT Group · NIIT Limited · NIIT Tech 관계 정의</h2>
+  <div class="highlight">
+    <strong>"NIIT Group"은 별도 등기 법인(Holding Company)이 아닙니다.</strong><br>
+    Pawar·Thadani가 이끄는 계열사 전체를 세상에서 통칭하는 <strong>브랜드명·호칭</strong>일 뿐입니다.
+  </div>
+  <table style="margin-top:14px;">
+    <tr><th>명칭</th><th>실체</th><th>역할</th></tr>
+    <tr><td><strong>NIIT Group</strong></td><td>법인 없음</td><td>계열사 전체를 묶는 브랜드 호칭</td></tr>
+    <tr><td><strong>NIIT Limited</strong></td><td>상장 법인 (BSE:500304)</td><td>그룹 최상위 실체 법인 · 교육 사업</td></tr>
+    <tr><td><strong>NIIT Technologies</strong></td><td>상장 법인 (→ Coforge)</td><td>NIIT Limited의 자회사 · IT 서비스 사업</td></tr>
+  </table>
+  <div class="note" style="margin-top:12px; font-size:13px; color:#555;">
+    창업자(Pawar·Thadani) → NIIT Limited 소유 → NIIT Technologies 소유.<br>
+    별도 지주회사 없이 NIIT Limited 자체가 그룹 최상단 법인이었음.
+  </div>
+</div>
+
+<!-- S4 -->
+<div class="section" id="s4">
+  <div class="section-num">04</div>
+  <h2>Baring PE 인수 → Coforge 리브랜딩 (2019~2020)</h2>
+  <table>
+    <tr><th>시점</th><th>내용</th><th>금액</th></tr>
+    <tr><td>2019년 4월</td><td>Baring Private Equity Asia(BPEA), NIIT Limited 등 프로모터로부터 <strong>30.6% 지분 인수</strong><br>주당 INR 1,394</td><td>INR 2,627 crore<br>(≈ USD 381M)</td></tr>
+    <tr><td>2019년 7월</td><td>공개매수(Open Offer)로 추가 취득 → <strong>65.6%</strong> 확보</td><td>INR 3,045 crore 추가</td></tr>
+    <tr><td>최종</td><td>BPEA <strong>약 70.1% 지분</strong> 확보</td><td>총 ≈ INR 5,000 crore (≈ USD 700M)</td></tr>
+    <tr><td>2020년 6월 14일</td><td>주주총회 명칭 변경 승인</td><td>—</td></tr>
+    <tr><td>2020년 8월 3일</td><td>공식 등기명 <strong>Coforge Limited</strong></td><td>—</td></tr>
+    <tr><td>2021~2023년</td><td>BPEA 블록 트레이드로 단계적 엑싯 → 2023년 8월 완전 엑싯</td><td>—</td></tr>
+  </table>
+  <div class="highlight" style="margin-top:14px;">
+    2019년 이후 Coforge(구 NIIT Technologies)는 NIIT Limited와 <strong>지분·경영 관계 완전 분리</strong>. 현재 Coforge는 NIIT 그룹과 아무 관계 없는 독립 법인.
+  </div>
+</div>
+
+<!-- S5 -->
+<div class="section" id="s5">
+  <div class="section-num">05</div>
+  <h2>NIIT Learning Systems Limited 역사</h2>
+  <table>
+    <tr><th>시점</th><th>법인명</th><th>비고</th></tr>
+    <tr><td>2001년 7월 16일</td><td><strong>Minimally Invasive Education Company</strong></td><td>NIIT Limited 100% 자회사로 설립<br>K-12 학교 교육 실험 사업</td></tr>
+    <tr><td>2003년 2월</td><td><strong>Hole-In-The-Wall Education Limited</strong></td><td>빈민가 벽 컴퓨터 교육 실험 프로젝트명 반영</td></tr>
+    <tr><td>2015년 6월</td><td><strong>MindChampion Learning Systems Limited</strong></td><td>사업 방향 전환</td></tr>
+    <tr><td>2022년 1월</td><td><strong>NIIT Learning Systems Limited</strong></td><td>인적분할 준비</td></tr>
+    <tr><td>2023년 5월 24일</td><td>NIIT Limited에서 기업교육(Corporate Learning) 사업 <strong>인적분할 수령</strong></td><td>NIIT Limited 주주 1:1 비율로 신주 배정</td></tr>
+    <tr><td>2023년 8월 8일</td><td>BSE·NSE <strong>상장 (NIITMTS)</strong></td><td>1,346,14,360주 상장</td></tr>
+  </table>
+  <div class="highlight" style="margin-top:14px;">
+    2001년 설립 당시 사업 목적(벽 컴퓨터 교육 실험)과 현재 사업(기업 맞춤 교육 아웃소싱)은 완전히 다름.<br>
+    2023년 인적분할 시 <strong>기존 자회사 법인을 그릇으로 활용</strong>한 구조.
+  </div>
+</div>
+
+<!-- S6 -->
+<div class="section" id="s6">
+  <div class="section-num">06</div>
+  <h2>전체 흐름 타임라인</h2>
+  <div class="timeline-flow">1981.12  Pace Education Private Limited 설립 (창업자 4명, 자본금 100만 루피)
+    ↓
+1988.10  공개법인(Public Limited) 전환
+    ↓
+1990.11  NIIT Limited 개명
+    ↓
+1992.05  NIIT Investments Private Limited 신설 (NIIT Limited 100% 출자)
+    ↓
+1993     NIIT Limited BSE/NSE 상장 (교육 사업)
+    ↓
+2001.07  Minimally Invasive Education Company 설립 (NIIT Limited 100% 자회사)
+    ↓
+2003~04  Global Solutions Business → NIIT Technologies로 이전 (Scheme of Arrangement)
+    ↓
+2004.05  NIIT Investments → NIIT Technologies Limited 개명 + BSE/NSE 상장
+    ↓
+2019.04  Baring PE, 프로모터로부터 30.6% 인수 (INR 2,627cr)
+    ↓
+2019.07  Open Offer → Baring PE 70.1% 확보 (총 INR ~5,000cr)
+    ↓
+2020.08  NIIT Technologies → Coforge Limited 리브랜딩 (NIIT와 완전 분리)
+    ↓
+2022.01  Hole-in-the-Wall/MindChampion → NIIT Learning Systems Limited 개명
+    ↓
+2023.05  NIIT Limited 기업교육 사업 → NIIT Learning Systems 인적분할
+    ↓
+2023.08  NIIT Learning Systems Limited BSE/NSE 상장 (NIITMTS)
+
+현재 NIIT 관련 상장 법인 3개:
+  ① NIIT Limited (NIITLTD)          — 직업훈련
+  ② NIIT Learning Systems (NIITMTS) — 기업교육
+  ③ Coforge Limited (COFORGE)       — IT 서비스 ← NIIT와 완전 분리</div>
+</div>
+
+<!-- S7 -->
+<div class="section" id="s7">
+  <div class="section-num">07</div>
+  <h2>NIIT Limited 현재 지분구조 (2026년 3월 기준)</h2>
+
+  <div class="stake-bar-wrap">
+    <div class="stake-row">
+      <div class="stake-label">프로모터</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-promoter" style="width:36.97%">36.97%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">외국 기관 (FII)</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-fii" style="width:10.11%">10.11%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">국내 기관 (DII)</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-dii" style="width:11.17%">11.17%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">일반 공개주주</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-public" style="width:41.73%">41.73%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">정부</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-govt" style="width:0.5%">0.01%</div></div>
+    </div>
+  </div>
+
+  <table style="margin-top:20px;">
+    <tr><th>프로모터 주체</th><th>지분율</th><th>비고</th></tr>
+    <tr><td><strong>Thadani Family Trust</strong> (수탁자: Vijay K. Thadani)</td><td><strong>18.16%</strong></td><td>공동창업자 Thadani 일가</td></tr>
+    <tr><td><strong>Pawar Family Trust</strong> (수탁자: Rajendra S. Pawar)</td><td><strong>17.75%</strong></td><td>공동창업자 Pawar 일가</td></tr>
+    <tr><td>Neeti Pawar & Rajendra Singh Pawar (개인)</td><td>0.27%</td><td>Pawar 개인 직접 보유</td></tr>
+    <tr><td>Arvind Thakur 외 임원·기타</td><td>~0.79%</td><td>기타 프로모터 그룹</td></tr>
+  </table>
+
+  <div class="highlight" style="margin-top:14px;">
+    ★ 2026년 6월 1~4일: Thadani Family Trust가 시장에서 390만 7천 주 <strong>추가 매수</strong> → 지분 <strong>39.80%로 상승</strong> (최신 공시 기준)<br>
+    두 패밀리 트러스트가 프로모터 지분의 97% 이상을 보유하는 <strong>완전한 창업자 양두 구조</strong>.
+  </div>
+</div>
+
+<!-- S8 -->
+<div class="section" id="s8">
+  <div class="section-num">08</div>
+  <h2>NIIT Learning Systems 현재 지분구조 (2026년 3월 기준)</h2>
+
+  <div class="stake-bar-wrap">
+    <div class="stake-row">
+      <div class="stake-label">프로모터</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-promoter" style="width:34.09%">34.09%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">외국 기관 (FII)</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-fii" style="width:16.75%">16.75%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">국내 기관 (DII)</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-dii" style="width:24.46%">24.46%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">일반 공개주주</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-public" style="width:24.67%">24.67%</div></div>
+    </div>
+    <div class="stake-row">
+      <div class="stake-label">정부</div>
+      <div class="stake-bar-bg"><div class="stake-bar bar-govt" style="width:0.5%">0.01%</div></div>
+    </div>
+  </div>
+
+  <div class="highlight" style="margin-top:16px;">
+    ⚠ 프로모터 34%는 <strong>인도 오너 기업 평균 대비 낮은 수준</strong> (통상 50~70%)<br>
+    2023년 상장 직후 34.84% → 현재 34.09%로 <strong>지속 하락 중</strong> — 프로모터 매도 시그널<br>
+    반면 국내 기관(DII)은 15.83% → 24.46%로 급증 — <strong>기관 매수세 강화</strong><br><br>
+    인적분할로 NIIT Limited 주주에게 1:1 배정됐기 때문에 프로모터 구성은 NIIT Limited와 동일: Pawar·Thadani 패밀리 트러스트
+  </div>
+</div>
+
+<div class="footer">
+  Coforge 심층 리서치 | NIIT 그룹 역사 & 지분구조 | 2026.06.10 | Mir Kim
+</div>
+
+</body>
+</html>

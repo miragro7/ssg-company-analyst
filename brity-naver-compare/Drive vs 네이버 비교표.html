@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>드라이브 기능 비교 · Brity Works vs Naver Works</title>
+  <style>
+    :root{--blue:#0b4a8f;--deep:#12345c;--naver:#03c75a;--brity:#1e6cbf;--line:#d8dee8;--soft:#f4f7fb;--text:#172033;--muted:#687386;--green:#157a45;--gray:#6c7480;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:#eef2f7;color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo",Arial,sans-serif;font-size:13px;line-height:1.5;}
+    .page{max-width:1400px;margin:0 auto;padding:28px 20px;}
+    .hero{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 28px 20px;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    .eyebrow{color:var(--blue);font-size:12px;font-weight:700;margin-bottom:6px;}
+    h1{font-size:26px;font-weight:800;color:var(--deep);margin-bottom:6px;}
+    .subtitle{color:var(--muted);font-size:13px;}
+    .score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;}
+    .sc{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px 14px;text-align:center;}
+    .sc .lbl{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:4px;}
+    .sc .val{font-size:22px;font-weight:800;}
+    .sc .val.b{color:var(--brity);}
+    .sc .val.n{color:var(--naver);}
+    .sec-title{font-size:16px;font-weight:800;color:var(--deep);margin:24px 0 10px;padding-left:10px;border-left:4px solid var(--blue);}
+    .domain-bar{font-size:14px;font-weight:800;color:#fff;margin:22px 0 8px;padding:9px 16px;background:var(--blue);border-radius:6px;}
+    .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-bottom:10px;font-size:11px;color:var(--muted);align-items:center;}
+    .legend span{display:inline-flex;align-items:center;gap:5px;}
+    .dot{display:inline-block;width:10px;height:10px;border-radius:2px;}
+    .dot.b-win{background:var(--brity);}
+    .dot.n-win{background:var(--naver);}
+    .dot.equal{background:#aabbcc;}
+    .dot.b-only{background:#9b59b6;}
+    .tbl-wrap{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:auto;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:20px;}
+    table{width:100%;min-width:900px;border-collapse:separate;border-spacing:0;}
+    thead th{position:sticky;top:0;z-index:2;background:#1a3a6b;color:#fff;font-size:12px;font-weight:700;padding:11px 10px;text-align:center;border-right:1px solid rgba(255,255,255,.15);}
+    thead th:last-child{border-right:none;}
+    tbody td{padding:12px 10px;vertical-align:top;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+    tbody td:last-child{border-right:none;}
+    tbody tr:last-child td{border-bottom:none;}
+    tbody tr:nth-child(even) td{background:#f9fbfd;}
+    .lv2{font-weight:800;font-size:14px;color:var(--deep);white-space:nowrap;}
+    .lv2-sub{font-size:11px;color:var(--muted);font-weight:400;margin-top:3px;}
+    .score-cell{text-align:center;}
+    .moon{width:38px;height:38px;border-radius:50%;border:1.5px solid #8c96a6;background:conic-gradient(#1e3d70 var(--fill),#e8edf3 0);margin:0 auto 6px;}
+    .moon.na{background:repeating-linear-gradient(45deg,#eef2f6 0 4px,#cdd5df 4px 8px);}
+    .score-num{font-size:18px;font-weight:800;display:block;}
+    .score-num.b{color:var(--brity);}
+    .score-num.n{color:var(--naver);}
+    .score-num.na{color:var(--gray);font-size:14px;}
+    .score-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+    .badge{display:inline-flex;align-items:center;justify-content:center;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800;white-space:nowrap;}
+    .badge.b-win{background:#dbeafe;color:#1e40af;}
+    .badge.n-win{background:#dcfce7;color:#15803d;}
+    .badge.equal{background:#f1f5f9;color:#475569;}
+    .badge.b-only{background:#ede9fe;color:#6d28d9;}
+    .eval{font-size:12px;color:#243044;line-height:1.55;}
+    .eval b{color:var(--deep);}
+    .eval .b-tag{color:var(--brity);font-weight:700;}
+    .eval .n-tag{color:#079248;font-weight:700;}
+    .ux-pair{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+    .ux-item{text-align:center;min-width:60px;}
+    .ux-lbl{font-size:10px;color:var(--muted);margin-bottom:4px;}
+    .ux-val{font-size:15px;font-weight:800;}
+    .ux-val.b{color:var(--brity);}
+    .ux-val.n{color:var(--naver);}
+    .ux-val.na{color:var(--gray);}
+    .no-ux-note{background:#f8f9fb;border:1px dashed var(--line);border-radius:8px;padding:10px 14px;color:var(--muted);font-size:12px;margin-bottom:20px;}
+    .footer{text-align:center;color:var(--muted);font-size:11px;margin-top:8px;padding-bottom:20px;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hero">
+    <div class="eyebrow">삼성SDS 브리티웍스 기능 진단 · KPMG 삼정회계법인 · Level 2 집계</div>
+    <h1>📁 드라이브 기능 비교 — Brity Works vs Naver Works</h1>
+    <p class="subtitle">기능성 진단(기능 보유 수준) + 사용성 진단(직관성·간결성)을 Level 2 기준으로 집계한 비교표입니다.</p>
+    <div class="score-row">
+      <div class="sc"><div class="lbl">기능성 종합 · Brity</div><div class="val b">3.92</div></div>
+      <div class="sc"><div class="lbl">기능성 종합 · Naver</div><div class="val n">3.72</div></div>
+      <div class="sc"><div class="lbl">사용성(직/간) · Brity</div><div class="val b">4.70 / 4.73</div></div>
+      <div class="sc"><div class="lbl">사용성(직/간) · Naver</div><div class="val n">4.63 / 4.97</div></div>
+    </div>
+  </div>
+
+  <div class="sec-title">▌ 기능성 진단 평가 (5점 척도)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 보유</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:140px">Brity Works (SDS)</th>
+          <th style="width:140px">Naver Works (경쟁사)</th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">문서 관리<div class="lv2-sub">폴더 관리 · 파일 관리 · 정보/이력 관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:83%"></div>
+            <span class="score-num b">4.17</span>
+            <div class="score-sub">폴더관리 4.0 / 파일관리 4.5 / 정보이력 4.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:81%"></div>
+            <span class="score-num n">4.07</span>
+            <div class="score-sub">폴더관리 4.0 / 파일관리 4.2 / 정보이력 4.0</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>폴더 관리:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span>·M365(One Drive) 동위. Brity Works는 Secure 폴더, 폴더 자동 정리 기능으로 차별화<br><br><b>파일 관리:</b> <span class="b-tag">Brity Works</span>·Google Workspace 동위. Brity Works는 중복 파일 관리, 요약 스타일 설정 등 문서 요약에 대한 맞춤형 기능 우위<br><br><b>정보/이력 관리:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span>·M365(One Drive) 동위</td>
+        </tr>
+        <tr>
+          <td class="lv2">문서 검색<div class="lv2-sub">문서 검색 · 문서 정렬</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:70%"></div>
+            <span class="score-num b">3.5</span>
+            <div class="score-sub">문서검색 3.0 / 문서정렬 4.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:60%"></div>
+            <span class="score-num n">3.0</span>
+            <div class="score-sub">문서검색 2.0 / 문서정렬 4.0</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>문서 검색:</b> Google Workspace 대비 <span class="b-tag">Brity Works</span> 열위. Google Workspace는 고급 검색 필터 세분화(파일 유형·소유자·파일 위치·수정 날짜·승인/전자서명 여부 등) 제공<br><br><b>문서 정렬:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span>·M365(One Drive) 동위. 정렬 세부 옵션·문서 서함 구분·View-type 설정 부분에서 차이 발생</td>
+        </tr>
+        <tr>
+          <td class="lv2">문서 공유<div class="lv2-sub">문서 공유 권한 관리 · 공동 편집 관리</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:82%"></div>
+            <span class="score-num b">4.1</span>
+            <div class="score-sub">공유권한관리 4.2 / 공동편집 4.0</div></td>
+          <td class="score-cell"><div class="moon" style="--fill:82%"></div>
+            <span class="score-num n">4.1</span>
+            <div class="score-sub">공유권한관리 4.2 / 공동편집 4.0</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>문서 공유 권한 관리:</b> M365(One Drive) 대비 <span class="b-tag">Brity Works</span> 열위. M365·Google Workspace·<span class="n-tag">Naver Works</span>는 폴더 생성 후 파일 요청 기능 제공. Naver의 경우 폴더별로 설정한 메일 주소로 발송 시 해당 폴더에 자동 업로드<br><br><b>공동 편집 관리:</b> M365(One Drive) 대비 <span class="b-tag">Brity Works</span> 열위. M365(One Drive)는 사용자별 주석활동 조회·공동 편집 작업 중 문서 공유 기능 제공</td>
+        </tr></tbody></table></div>
+
+  <div class="sec-title">▌ 사용성 진단 평가 (5점 척도 · 직관성 / 간결성)</div>
+  <div class="legend">
+    <span><span class="dot b-win"></span> Brity Works 우위</span>
+    <span><span class="dot n-win"></span> Naver Works 우위</span>
+    <span><span class="dot equal"></span> 동등 수준 (0.1점 이내)</span>
+    <span><span class="dot b-only"></span> Brity Works 단독 (Naver 미보유)</span>
+    <span style="color:var(--muted)">평가 기준: 공공부문 업무 시나리오 기반, 직관성(해당 기능을 바로 식별·사용 가능한지) / 간결성(불필요한 클릭 없이 수행 가능한지)</span>
+  </div>
+  <div class="tbl-wrap"><table><thead><tr>
+          <th style="width:160px">기능 구분 (Level 2)</th>
+          <th style="width:180px">Brity Works (SDS)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:180px">Naver Works (경쟁사)<br><span style="font-weight:400;font-size:11px">직관성 / 간결성</span></th>
+          <th style="width:110px">판정</th>
+          <th>평가 근거</th>
+        </tr></thead><tbody>
+        <tr>
+          <td class="lv2">문서 관리<div class="lv2-sub">파일 관리 · 폴더 관리</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">5.0</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">5.0</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">파일관리 5.00/5.00 · 폴더관리 5.00/5.00</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.9</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">4.9</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">파일관리 4.80/4.80 · 폴더관리 5.00/5.00</div></td>
+          <td style="text-align:center"><span class="badge equal">동등 수준</span></td>
+          <td class="eval"><b>파일 관리:</b> <span class="b-tag">Brity Works</span>·Dooray·M365·Google Workspace 공동 1위. 주요 기능 인지 및 사용 흐름에서 유사한 수준의 직관성·간결성 제공<br><br><b>폴더 관리:</b> <span class="b-tag">Brity Works</span>·<span class="n-tag">Naver Works</span>·Dooray·Google Workspace 공동 1위. 직관성·간결성 모두 최상위</td>
+        </tr>
+        <tr>
+          <td class="lv2">문서 공유<div class="lv2-sub">문서 공유 권한 관리</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.4</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">5.0</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">공유권한관리 4.40 / 5.00</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">4.0</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">5.0</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">공유권한관리 4.00 / 5.00</div></td>
+          <td style="text-align:center"><span class="badge b-win">Brity 우위</span></td>
+          <td class="eval"><b>문서 공유 권한 관리:</b> Dooray 직관성 1위. <span class="b-tag">Brity Works</span>는 공유 기능 접근성은 확보되어 있으나 공유 대상 범위 인지 측면에서 사용자 이해도를 높일 수 있는 UI 개선 필요. 간결성은 4개 솔루션 공동 1위</td>
+        </tr>
+        <tr>
+          <td class="lv2">문서 검색<div class="lv2-sub">문서 검색</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val b">4.7</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val b">4.2</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">문서검색 4.70 / 4.20</div></td>
+          <td class="score-cell"><div class="ux-pair">
+              <div class="ux-item"><div class="ux-lbl">직관성</div><div class="ux-val n">5.0</div></div>
+              <div class="ux-item"><div class="ux-lbl">간결성</div><div class="ux-val n">5.0</div></div>
+            </div>
+            <div class="score-sub" style="margin-top:6px">문서검색 5.00 / 5.00</div></td>
+          <td style="text-align:center"><span class="badge n-win">Naver 우위</span></td>
+          <td class="eval"><b>문서 검색:</b> <span class="n-tag">Naver Works</span>·Google Workspace 직관성 공동 1위. Naver Works·Google Workspace는 검색 창 내 필터 아이콘이 상시 노출되어 기능 인지가 용이함. <span class="b-tag">Brity Works</span>는 검색 아이콘 진입 이후 필터 기능을 제공하는 구조로 상시 노출 방식 대비 직관성·간결성 추가 고도화 필요</td>
+        </tr></tbody></table></div>
+
+  <div class="footer">출처: 삼성SDS 브리티웍스 기능 진단 및 고도화 전략 수립 — 솔루션 기능비교 결과서 (KPMG 삼정회계법인)<br>* 기능성 평가: 5개 솔루션 공통 보유 기능 기준 상대 평가 / 사용성 평가: 공공부문 업무 시나리오 기반 5점 척도 / 동등 수준 판단 기준: 점수 격차 0.1점 이내</div>
+</div>
+</body>
+</html>
